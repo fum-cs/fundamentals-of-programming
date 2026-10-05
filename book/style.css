@@ -373,3 +373,25 @@ html:not(.dark) main img[src$=".gif"] {
   filter: invert(1) hue-rotate(180deg);
   mix-blend-mode: screen;
 }
+
+
+[data-name*="output" i]:has([data-ap], .ap-fig):not([data-name*="output" i] *):not([class*="output" i] *),
+[class*="output" i]:has([data-ap], .ap-fig):not([data-name*="output" i] *):not([class*="output" i] *) {
+  --out-fg: #1f2328;
+  background: transparent !important;
+  border-left: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 1rem 0 1.6rem !important;
+}
+
+.dark [data-name*="output" i]:has([data-ap], .ap-fig):not([data-name*="output" i] *):not([class*="output" i] *),
+.dark [class*="output" i]:has([data-ap], .ap-fig):not([data-name*="output" i] *):not([class*="output" i] *) {
+  --out-fg: #e6edf3;
+}
+
+[data-name*="output" i]:has([data-ap], .ap-fig):not([data-name*="output" i] *):not([class*="output" i] *)::before,
+[class*="output" i]:has([data-ap], .ap-fig):not([data-name*="output" i] *):not([class*="output" i] *)::before {
+  content: none !important;
+  display: none !important;
+}
