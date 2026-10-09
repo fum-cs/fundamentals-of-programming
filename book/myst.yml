@@ -1,0 +1,44 @@
+version: 1
+project:
+  title: "مبانی کامپیوتر و برنامه‌سازی"
+  github: https://github.com/fum-cs/fundamentals-of-programming
+  affiliations:
+    - id: fum
+      institution: دانشگاه فردوسی مشهد
+      department: گروه علوم کامپیوتر
+      country: ایران
+  toc:
+    - file: index.md    
+    - title: بخش اول | مبانی و مقدمات
+      children:
+        - file: parts/p01-basics/part-one.md
+    - title: بخش دوم | داده‌ها و عملگرها
+      children:
+        - file: parts/p02-data-operators/part-two.md
+    - title: بخش سوم | کنترل جریان
+      children:
+        - file: parts/p03-control-flow/part-three.md
+    - title: بخش چهارم | توابع
+      children:
+        - file: parts/p04-functions/part-four.md
+    - title: بخش پنجم | ساختارهای داده پایه
+      children:
+        - file: parts/p05-basic-data-structures/part-five.ipynb
+    - title: بخش ششم | اشاره‌گرها و حافظه
+      children:
+        - file: parts/p06-pointers-memory/part-six.md
+    - title: بخش هفتم | داده‌های ترکیبی و فایل
+      children:
+        - file: parts/p07-structs-files/part-seven.md
+    - title: بخش هشتم | مباحث تکمیلی
+      children:
+        - file: parts/p08-misc/part-eight.md
+site:
+  template: book-theme
+  title: "مبانی کامپیوتر و برنامه‌سازی"
+  options:
+    logo: images/Ferdowsi-University-of-Mashhad-Logo.svg
+    logo_text: "دانشگاه فردوسی مشهد"
+    style: style.css
+  parts:
+    primary_sidebar_footer: sidebar-footer.md
