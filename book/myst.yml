@@ -26,7 +26,7 @@ project:
         - file: parts/p05-basic-data-structures/part-five.ipynb
     - title: بخش ششم | اشاره‌گرها و حافظه
       children:
-        - file: parts/p06-pointers-memory/part-six.md
+        - file: parts/p06-pointers-memory/part-six.ipynb
     - title: بخش هفتم | داده‌های ترکیبی و فایل
       children:
         - file: parts/p07-structs-files/part-seven.md
