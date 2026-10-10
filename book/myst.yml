@@ -17,7 +17,7 @@ project:
         - file: parts/p02-data-operators/part-two.md
     - title: بخش سوم | کنترل جریان
       children:
-        - file: parts/p03-control-flow/part-three.md
+        - file: parts/p03-control-flow/part-three.ipynb
     - title: بخش چهارم | توابع
       children:
         - file: parts/p04-functions/part-four.md
