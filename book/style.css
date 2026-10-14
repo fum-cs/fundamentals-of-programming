@@ -1,0 +1,397 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap');
+
+main h1, main h2, main h3, main h4, main h5, main h6,
+main p, main li, main blockquote, main td, main th {
+  unicode-bidi: plaintext;
+  text-align: start !important;
+  font-family: 'Vazirmatn', sans-serif;
+}
+
+main pre, main pre *, main code, main .mermaid, main figure, main iframe {
+  direction: ltr;
+  unicode-bidi: normal;
+  text-align: left !important;
+}
+main pre, main pre code {
+  font-family: ui-monospace, Consolas, monospace;
+}
+
+main ul, main ol {
+  direction: rtl;
+  padding-left: 0 !important;
+  padding-right: 1.5rem !important;
+  margin-left: 0 !important;
+}
+
+main li {
+  text-align: start !important;
+}
+
+main li pre, main li pre * , main li code {
+  direction: ltr;
+}
+
+main li,
+main li p,
+main li > div {
+  text-align: right !important;
+}
+
+main li pre,
+main li pre * {
+  text-align: left !important;
+  direction: ltr;
+}
+
+
+
+[data-name*="output"]:not([data-name*="output"] *):not([class*="output" i] *),
+[class*="output" i]:not([data-name*="output"] *):not([class*="output" i] *) {
+  --out-bg: #f6f8fa;
+  --out-fg: #116329;
+  --out-label: #8b949e;
+  --out-bar: #3fb950;
+}
+
+.dark [data-name*="output"]:not([data-name*="output"] *):not([class*="output" i] *),
+.dark [class*="output" i]:not([data-name*="output"] *):not([class*="output" i] *) {
+  --out-bg: #0d1117;
+  --out-fg: #7ee787;
+  --out-label: #6e7681;
+  --out-bar: #3fb950;
+}
+
+[data-name*="output"] *,
+[class*="output" i] * {
+  font-family: "Ubuntu Mono", "Fira Code", ui-monospace, Consolas, monospace !important;
+  font-size: 0.92rem !important;
+  font-weight: 400 !important;
+  color: var(--out-fg) !important;
+  opacity: 1 !important;
+  direction: ltr;
+  text-align: left !important;
+  background: transparent !important;
+}
+
+[data-name*="output"]:not([data-name*="output"] *):not([class*="output" i] *),
+[class*="output" i]:not([data-name*="output"] *):not([class*="output" i] *) {
+  position: relative;
+  margin: 0.5rem 0 1.2rem;
+  padding: 1.7rem 1rem 0.8rem;
+  background: var(--out-bg) !important;
+  border-left: 4px solid var(--out-bar);
+  border-radius: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  direction: ltr;
+  text-align: left !important;
+}
+
+[data-name*="output"]:not([data-name*="output"] *):not([class*="output" i] *)::before,
+[class*="output" i]:not([data-name*="output"] *):not([class*="output" i] *)::before {
+  content: "OUTPUT";
+  position: absolute;
+  top: 0.45rem;
+  left: 1rem;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--out-label);
+}
+
+
+[data-name*="output"] .fa,
+[data-name*="output"] i[class*="fa-"],
+[class*="output" i] .fa,
+[class*="output" i] i[class*="fa-"] {
+  font-family: FontAwesome, "Font Awesome 5 Free", "Font Awesome 6 Free" !important;
+  font-weight: 400 !important;
+}
+
+
+[data-name*="output"]:has(.animation):not([data-name*="output"] *):not([class*="output" i] *),
+[class*="output" i]:has(.animation):not([data-name*="output"] *):not([class*="output" i] *) {
+  padding-top: 0.8rem;
+}
+
+[data-name*="output"] .animation,
+[class*="output" i] .animation {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+}
+
+[data-name*="output"] .animation *,
+[class*="output" i] .animation * {
+  text-align: center !important;
+}
+
+[data-name*="output"] .anim-controls,
+[class*="output" i] .anim-controls {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  width: 100%;
+}
+
+[data-name*="output"] .anim-buttons,
+[class*="output" i] .anim-buttons {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+[data-name*="output"] .anim-state,
+[class*="output" i] .anim-state {
+  display: flex !important;
+  justify-content: center !important;
+  gap: 1rem;
+  width: 100%;
+}
+
+
+[data-name*="output"]:has(.animation):not([data-name*="output"] *):not([class*="output" i] *),
+[class*="output" i]:has(.animation):not([data-name*="output"] *):not([class*="output" i] *) {
+  --out-bar: #8957e5;
+  --out-fg: #6e40c9;
+  --out-label: #8957e5;
+
+  border-left: 4px solid var(--out-bar);
+  padding-top: 1.7rem;
+}
+
+.dark [data-name*="output"]:has(.animation):not([data-name*="output"] *):not([class*="output" i] *),
+.dark [class*="output" i]:has(.animation):not([data-name*="output"] *):not([class*="output" i] *) {
+  --out-bar: #a371f7;
+  --out-fg: #d2a8ff;
+  --out-label: #a371f7;
+  --out-bg: #1a132667;
+}
+
+[data-name*="output" i]:has(.animation):not([data-name*="output" i] *):not([class*="output" i] *)::before,
+[class*="output" i]:has(.animation):not([data-name*="output" i] *):not([class*="output" i] *)::before {
+  content: "ANIMATION" !important;
+}
+
+
+[data-name*="output" i] input[type="range"],
+[data-name*="output" i] input[type="radio"],
+[class*="output" i] input[type="range"],
+[class*="output" i] input[type="radio"] {
+  accent-color: var(--out-fg) !important;
+}
+
+[data-name*="output" i] input:focus-visible,
+[class*="output" i] input:focus-visible {
+  outline: 2px solid var(--out-bar) !important;
+  outline-offset: 2px;
+}
+
+
+[data-name*="output" i]:has(img):not(:has(.animation)):not([data-name*="output" i] *):not([class*="output" i] *),
+[class*="output" i]:has(img):not(:has(.animation)):not([data-name*="output" i] *):not([class*="output" i] *) {
+  --out-bar: #f59e0b;
+  --out-fg: #b45309;
+  --out-label: #d97706;
+  --out-bg: #fefcf3;
+}
+
+.dark [data-name*="output" i]:has(img):not(:has(.animation)):not([data-name*="output" i] *):not([class*="output" i] *),
+.dark [class*="output" i]:has(img):not(:has(.animation)):not([data-name*="output" i] *):not([class*="output" i] *) {
+  --out-bar: #fbbf24;
+  --out-fg: #fcd34d;
+  --out-label: #fbbf24;
+  --out-bg: #1c1917;
+}
+
+[data-name*="output" i]:has(img):not(:has(.animation)):not([data-name*="output" i] *):not([class*="output" i] *)::before,
+[class*="output" i]:has(img):not(:has(.animation)):not([data-name*="output" i] *):not([class*="output" i] *)::before {
+  content: "PLOT";
+}
+
+
+main table {
+  direction: rtl;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2rem 0;
+}
+
+main th, main td {
+  unicode-bidi: isolate !important;
+  direction: rtl;
+  text-align: center !important;
+  padding: 0.6rem 1rem;
+  border: 1px solid rgba(128, 128, 128, 0.4);
+}
+
+main th {
+  font-weight: 700;
+  background: rgba(128, 128, 128, 0.12);
+}
+
+
+main div:has(> .myst-fm-author-col) {
+  --team-fg: #1f2328;
+  --team-line: rgba(0, 0, 0, 0.35);
+  --team-soft: rgba(0, 0, 0, 0.05);
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.6rem;
+  direction: rtl;
+  text-align: right;
+  font-family: 'Vazirmatn', sans-serif;
+  color: var(--team-fg);
+  margin: 0.5rem 0 1.5rem;
+  padding: 1rem 1.2rem;
+  background: var(--team-soft);
+  border-right: 4px solid var(--team-fg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.dark main div:has(> .myst-fm-author-col) {
+  --team-fg: #e6edf3;
+  --team-line: rgba(255, 255, 255, 0.35);
+  --team-soft: rgba(255, 255, 255, 0.06);
+}
+
+.myst-fm-authors-header-authors,
+.myst-fm-authors-header-affil,
+.myst-fm-affiliation-col {
+  display: none !important;
+}
+
+main div:has(> .myst-fm-author-col)::before,
+main div:has(> .myst-fm-author-col)::after {
+  flex: 0 0 100%;
+  direction: ltr;
+  text-align: right;
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  color: var(--team-fg);
+  opacity: 0.7;
+}
+
+main div:has(> .myst-fm-author-col)::before {
+  content: "SUPERVISOR · استاد راهنما";
+  order: 0;
+}
+
+.myst-fm-authors-header-affil + .myst-fm-author-col {
+  order: 1;
+  flex: 0 0 auto;
+  padding: 0.6rem 1rem;
+  font-size: 1.1rem;
+  color: #fff;
+  background: var(--team-fg);
+  border: 1px solid var(--team-fg);
+}
+.dark .myst-fm-authors-header-affil + .myst-fm-author-col {
+  color: var(--team-fg);
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+}
+
+main div:has(> .myst-fm-author-col)::after {
+  content: "AUTHORS & EDITORS · نویسندگان و ویراستاران";
+  order: 2;
+  margin-top: 0.8rem;
+}
+
+
+.myst-fm-author-col {
+  order: 3;
+  padding: 0.25rem 0.9rem;
+  border: 1px solid var(--team-line);
+  font-size: 0.95rem;
+}
+.myst-fm-authors-header-affil + .myst-fm-author-col {
+  order: 1;
+}
+
+.myst-fm-author-name { font-weight: 700; }
+.myst-fm-author-icon-link { color: inherit; }
+
+
+[class*="sidebar" i] img[alt*="لوگو"] {
+  max-width: 90px;
+  height: auto;
+  display: block;
+  margin: 0.5rem auto 0.3rem;
+}
+
+[class*="sidebar" i] img[alt*="لوگو"] + p,
+[class*="sidebar" i] p:has(+ img[alt*="لوگو"]) {
+  text-align: center;
+}
+
+
+.sidebar-footer-text {
+  text-align: center;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: rgba(31, 35, 40, 0.7);
+}
+.dark .sidebar-footer-text {
+  color: rgba(230, 237, 243, 0.7);
+}
+
+
+[data-name*="output" i]:has(img[src$=".gif"]):not(:has(.animation)):not([data-name*="output" i] *):not([class*="output" i] *),
+[class*="output" i]:has(img[src$=".gif"]):not(:has(.animation)):not([data-name*="output" i] *):not([class*="output" i] *) {
+  background: transparent !important;
+  border-left: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0.5rem 0 1rem !important;
+}
+
+[data-name*="output" i]:has(img[src$=".gif"]):not(:has(.animation)):not([data-name*="output" i] *):not([class*="output" i] *)::before,
+[class*="output" i]:has(img[src$=".gif"]):not(:has(.animation)):not([data-name*="output" i] *):not([class*="output" i] *)::before {
+  content: none !important;
+  display: none !important;
+}
+
+
+main img[src$=".gif"] {
+  display: block;
+  width: 400px;
+  max-width: 100%;
+  height: auto;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+html:not(.dark) main img[src$=".gif"] {
+  mix-blend-mode: multiply;
+}
+.dark main img[src$=".gif"] {
+  filter: invert(1) hue-rotate(180deg);
+  mix-blend-mode: screen;
+}
+
+
+[data-name*="output" i]:has([data-ap], .ap-fig):not([data-name*="output" i] *):not([class*="output" i] *),
+[class*="output" i]:has([data-ap], .ap-fig):not([data-name*="output" i] *):not([class*="output" i] *) {
+  --out-fg: #1f2328;
+  background: transparent !important;
+  border-left: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 1rem 0 1.6rem !important;
+}
+
+.dark [data-name*="output" i]:has([data-ap], .ap-fig):not([data-name*="output" i] *):not([class*="output" i] *),
+.dark [class*="output" i]:has([data-ap], .ap-fig):not([data-name*="output" i] *):not([class*="output" i] *) {
+  --out-fg: #e6edf3;
+}
+
+[data-name*="output" i]:has([data-ap], .ap-fig):not([data-name*="output" i] *):not([class*="output" i] *)::before,
+[class*="output" i]:has([data-ap], .ap-fig):not([data-name*="output" i] *):not([class*="output" i] *)::before {
+  content: none !important;
+  display: none !important;
+}
