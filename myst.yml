@@ -20,7 +20,7 @@ project:
         - file: book/parts/p03-control-flow/part-three.md
     - title: بخش چهارم | توابع
       children:
-        - file: book/parts/p04-functions/part-four.md
+        - file: book/parts/p04-functions/part-four.ipynb
     - title: بخش پنجم | ساختارهای داده پایه
       children:
         - file: book/parts/p05-basic-data-structures/part-five.ipynb
