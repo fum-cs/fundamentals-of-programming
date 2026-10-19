@@ -14,7 +14,7 @@ project:
         - file: book/parts/p01-basics/part-one.md
     - title: بخش دوم | داده‌ها و عملگرها
       children:
-        - file: book/parts/p02-data-operators/part-two.md
+        - file: book/parts/p02-data-operators/part-two.ipynb
     - title: بخش سوم | کنترل جریان
       children:
         - file: book/parts/p03-control-flow/part-three.ipynb
