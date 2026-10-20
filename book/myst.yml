@@ -29,7 +29,7 @@ project:
         - file: parts/p06-pointers-memory/part-six.ipynb
     - title: بخش هفتم | داده‌های ترکیبی و فایل
       children:
-        - file: parts/p07-structs-files/part-seven.md
+        - file: parts/p07-structs-files/part-seven.ipynb
     - title: بخش هشتم | مباحث تکمیلی
       children:
         - file: parts/p08-misc/part-eight.md
