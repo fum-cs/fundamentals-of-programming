@@ -19,11 +19,9 @@ project:
       children:
         - file: book/parts/p03-control-flow/part-three.ipynb
     - title: بخش چهارم | توابع و بازگشت
-      children:
-        - file: book/parts/p04-functions/part-four-lecture.ipynb
+      file: book/parts/p04-functions/part-four-lecture.ipynb
       children:
         - file: book/parts/p04-functions/part-four-supplementary.ipynb
-      children:
         - file: book/parts/p04-functions/part-four-exercises.ipynb
     - title: بخش پنجم | ساختارهای داده پایه
       children:
