@@ -1,17 +1,16 @@
-
 #include <stdio.h>
 
 int main(void)
 {
     for (int n = 1; n <= 10; n += 3) {
 
-        /* جعبه ۱: حلقه */
+        /* box 1: loop */
         int by_loop = 0;
         for (int i = 1; i <= n; i++) {
             by_loop += i;
         }
 
-        /* جعبه ۲: فرمول */
+        /* box 2: formula */
         int by_formula = n * (n + 1) / 2;
 
         printf("n = %2d | loop = %2d | formula = %2d | same? %s\n",

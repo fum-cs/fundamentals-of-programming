@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 
 static unsigned long calls, depth, max_depth;

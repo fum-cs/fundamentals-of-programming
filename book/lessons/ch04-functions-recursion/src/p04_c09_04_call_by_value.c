@@ -1,9 +1,8 @@
-
 #include <stdio.h>
 
 void try_to_change(int x)
 {
-    x = 99;                                   /* فقط نسخهٔ محلی تغییر می‌کند */
+    x = 99;                                   /* only the local copy changes */
     printf("inside  : x = %d\n", x);
 }
 

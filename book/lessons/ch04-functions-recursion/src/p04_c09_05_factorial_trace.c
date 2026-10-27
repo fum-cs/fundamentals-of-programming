@@ -1,7 +1,6 @@
-
 #include <stdio.h>
 
-static int depth = 0;                 /* فقط برای تورفتگی در خروجی */
+static int depth = 0;                 /* only used for indentation */
 
 unsigned long long fact(unsigned n)   /* fact : N -> N */
 {

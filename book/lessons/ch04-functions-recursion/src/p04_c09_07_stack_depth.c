@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 
 #ifndef N

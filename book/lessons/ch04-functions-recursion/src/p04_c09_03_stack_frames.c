@@ -1,11 +1,10 @@
-
 #include <stdio.h>
 
 static char *first;
 
 void level(int depth)
 {
-    int local = depth * 10;                       /* متغیر محلی همین فریم */
+    int local = depth * 10;                       /* local variable of this frame */
 
     if (depth == 0) first = (char *)&local;
     printf("depth=%d  local=%2d  distance_from_first_frame=%ld bytes\n",

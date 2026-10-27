@@ -1,9 +1,8 @@
-
 #include <stdio.h>
 
-int a, b, result;            /* حافظهٔ مشترک: ورودی و خروجی‌های رویه */
+int a, b, result;            /* shared memory: inputs and outputs of the procedure */
 
-void add_proc(void)          /* رویه: بدون ورودی، بدون خروجی */
+void add_proc(void)          /* procedure: no parameters, no return value */
 {
     result = a + b;
 }

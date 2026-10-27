@@ -1,6 +1,5 @@
-
 #include <stdio.h>
-#define uint    unsigned int
+typedef unsigned int uint;
 
 uint inc(uint a){ return ++a; }
 uint dec(uint a){ return --a; }

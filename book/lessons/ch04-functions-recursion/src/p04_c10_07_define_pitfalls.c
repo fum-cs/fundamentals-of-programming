@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 
 #define SQUARE_BAD(x)  x * x
@@ -9,14 +8,14 @@
 
 static int counter = 0;
 
-int next(void)                         /* هر بار صدا زده شود، شمارنده را زیاد می‌کند */
+int next(void)                         /* increments the counter on every call */
 {
     counter++;
     printf("   next() called -> %d\n", counter);
     return counter;
 }
 
-int max_fn(int a, int b) { return a > b ? a : b; }     /* نسخهٔ تابع واقعی */
+int max_fn(int a, int b) { return a > b ? a : b; }     /* real function version */
 
 int main(void)
 {

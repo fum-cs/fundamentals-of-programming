@@ -1,4 +1,3 @@
-
 #define SQUARE_BAD(x)  x * x
 #define SQUARE(x)      ((x) * (x))
 #define DOUBLE_BAD(x)  x + x

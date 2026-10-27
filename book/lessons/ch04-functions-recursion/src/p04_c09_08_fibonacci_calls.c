@@ -1,7 +1,6 @@
-
 #include <stdio.h>
 
-static unsigned long calls = 0;       /* شمارندهٔ مشترک بین همهٔ فراخوانی‌ها */
+static unsigned long calls = 0;       /* counter shared by all calls */
 
 unsigned long fib(int n)
 {

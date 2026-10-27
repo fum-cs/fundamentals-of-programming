@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 
 int  n;
@@ -12,7 +11,7 @@ void fact_proc(void)
     }
     n = n - 1;
     fact_proc();
-    n = n + 1;               /* مقدار اصلی n را «دستی» بازگردان */
+    n = n + 1;               /* restore the original n by hand */
     result = result * n;
 }
 
