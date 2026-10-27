@@ -7,87 +7,32 @@ project:
       institution: دانشگاه فردوسی مشهد
       department: گروه علوم کامپیوتر
       country: ایران
-  exclude:
-    - venv/**
-    - _build/**
-    - book/_build/**
-    - README.md
-    - CONTRIBUTING.md
-    - production.md
   toc:
-    - file: book/index.md
-    - title: "فصل اول: مبانی و مقدمات"
+    - file: book/index.md    
+    - title: بخش اول | مبانی و مقدمات
       children:
-        - file: book/lessons/ch01-basics/lecture.ipynb
-        - file: book/lessons/ch01-basics/supplementary.ipynb
-        - file: book/lessons/ch01-basics/exercises.ipynb
-    - title: "فصل دوم: داده‌ها و عملگرها"
+        - file: book/parts/p01-basics/part-one.md
+    - title: بخش دوم | داده‌ها و عملگرها
       children:
-        - file: book/lessons/ch02-data-operators/lecture.ipynb
-        - file: book/lessons/ch02-data-operators/supplementary.ipynb
-        - file: book/lessons/ch02-data-operators/exercises.ipynb
-    - title: "فصل سوم: کنترل جریان"
+        - file: book/parts/p02-data-operators/part-two.ipynb
+    - title: بخش سوم | کنترل جریان
       children:
-        - file: book/lessons/ch03-control-flow/lecture.ipynb
-        - file: book/lessons/ch03-control-flow/supplementary.ipynb
-        - file: book/lessons/ch03-control-flow/exercises.ipynb
-    - title: "فصل چهارم: توابع و بازگشت"
+        - file: book/parts/p03-control-flow/part-three.ipynb
+    - title: بخش چهارم | توابع
       children:
-        - file: book/lessons/ch04-functions-recursion/lecture.ipynb
-        - file: book/lessons/ch04-functions-recursion/supplementary.ipynb
-        - file: book/lessons/ch04-functions-recursion/exercises.ipynb
-    - title: "فصل پنجم: ساختارهای داده پایه"
+        - file: book/parts/p04-functions/part-four.ipynb
+    - title: بخش پنجم | ساختارهای داده پایه
       children:
-        - file: book/lessons/ch05-basic-data-structures/lecture.ipynb
-        - file: book/lessons/ch05-basic-data-structures/supplementary.ipynb
-        - file: book/lessons/ch05-basic-data-structures/exercises.ipynb
-    - title: "فصل ششم: اشاره‌گرها و حافظه"
+        - file: book/parts/p05-basic-data-structures/part-five.ipynb
+    - title: بخش ششم | اشاره‌گرها و حافظه
       children:
-        - file: book/lessons/ch06-pointers-memory/lecture.ipynb
-        - file: book/lessons/ch06-pointers-memory/supplementary.ipynb
-        - file: book/lessons/ch06-pointers-memory/exercises.ipynb
-    - title: "فصل هفتم: داده‌های ترکیبی و فایل"
+        - file: book/parts/p06-pointers-memory/part-six.ipynb
+    - title: بخش هفتم | داده‌های ترکیبی و فایل
       children:
-        - file: book/lessons/ch07-structs-files/lecture.ipynb
-        - file: book/lessons/ch07-structs-files/supplementary.ipynb
-        - file: book/lessons/ch07-structs-files/exercises.ipynb
-    - title: "فصل هشتم: مباحث تکمیلی"
+        - file: book/parts/p07-structs-files/part-seven.ipynb
+    - title: بخش هشتم | مباحث تکمیلی
       children:
-        - file: book/lessons/ch08-misc/lecture.ipynb
-        - file: book/lessons/ch08-misc/supplementary.ipynb
-        - file: book/lessons/ch08-misc/exercises.ipynb
-    - title: "مسائل فصل اول: مبانی و مقدمات"
-      children:
-        - file: book/problems/ch01-basics/problems.md
-        - file: book/answers/ch01-basics/answers.md
-    - title: "مسائل فصل دوم: داده‌ها و عملگرها"
-      children:
-        - file: book/problems/ch02-data-operators/problems.md
-        - file: book/answers/ch02-data-operators/answers.md
-    - title: "مسائل فصل سوم: کنترل جریان"
-      children:
-        - file: book/problems/ch03-control-flow/problems.md
-        - file: book/answers/ch03-control-flow/answers.md
-    - title: "مسائل فصل چهارم: توابع و بازگشت"
-      children:
-        - file: book/problems/ch04-functions-recursion/problems.md
-        - file: book/answers/ch04-functions-recursion/answers.md
-    - title: "مسائل فصل پنجم: ساختارهای داده پایه"
-      children:
-        - file: book/problems/ch05-basic-data-structures/problems.md
-        - file: book/answers/ch05-basic-data-structures/answers.md
-    - title: "مسائل فصل ششم: اشاره‌گرها و حافظه"
-      children:
-        - file: book/problems/ch06-pointers-memory/problems.md
-        - file: book/answers/ch06-pointers-memory/answers.md
-    - title: "مسائل فصل هفتم: داده‌های ترکیبی و فایل"
-      children:
-        - file: book/problems/ch07-structs-files/problems.md
-        - file: book/answers/ch07-structs-files/answers.md
-    - title: "مسائل فصل هشتم: مباحث تکمیلی"
-      children:
-        - file: book/problems/ch08-misc/problems.md
-        - file: book/answers/ch08-misc/answers.md
+        - file: book/parts/p08-misc/part-eight.md
 site:
   template: book-theme
   title: "مبانی کامپیوتر و برنامه‌سازی"
