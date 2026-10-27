@@ -1,16 +1,15 @@
-
 #include <stdio.h>
 
 int main(void)
 {
-    /* A = {0, 1, ..., 7}  و  f(x) = x^2 mod 8 */
+    /* A = {0, 1, ..., 7} and f(x) = x^2 mod 8 */
     printf("graph of f = { ");
     for (int x = 0; x < 8; x++) {
         printf("(%d,%d) ", x, (x * x) % 8);
     }
     printf("}\n");
 
-    /* برد: تعداد y هایی که حداقل یک x به آن‌ها می‌رسد */
+    /* image: count the y values reached by at least one x */
     int image_size = 0;
     for (int y = 0; y < 8; y++) {
         int reached = 0;
@@ -20,7 +19,7 @@ int main(void)
         image_size += reached;
     }
 
-    /* یک‌به‌یک؟ آیا دو x متفاوت با خروجی یکسان وجود دارد؟ */
+    /* injective? is there a pair of different x with the same output? */
     int injective = 1;
     for (int x1 = 0; x1 < 8; x1++)
         for (int x2 = x1 + 1; x2 < 8; x2++)

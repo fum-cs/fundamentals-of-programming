@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 
 unsigned long long fact(unsigned n)

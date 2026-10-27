@@ -1,18 +1,17 @@
-
 #include <stdio.h>
 
-/* بازگشتی (دُم‌دار): gcd(a, 0) = a ;  gcd(a, b) = gcd(b, a mod b) */
+/* recursive (tail form): gcd(a, 0) = a ; gcd(a, b) = gcd(b, a mod b) */
 unsigned gcd_rec(unsigned a, unsigned b)
 {
     return b == 0 ? a : gcd_rec(b, a % b);
 }
 
-/* حلقه: پارامترها → متغیرهای حلقه */
+/* loop: parameters become loop variables */
 unsigned gcd_loop(unsigned a, unsigned b)
 {
     while (b != 0) {
-        unsigned t = a % b;       /* مقدار جدید b */
-        a = b;                    /* به‌روزرسانی هم‌زمان (a, b) ← (b, a mod b) */
+        unsigned t = a % b;       /* new value of b */
+        a = b;                    /* simultaneous update (a, b) <- (b, a mod b) */
         b = t;
     }
     return a;

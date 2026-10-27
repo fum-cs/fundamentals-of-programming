@@ -1,8 +1,7 @@
-
 #include <stdio.h>
 #include "adt.h"
 
-/* C(n,k) با حلقه + Stack صریح (DFS). nodes = تعداد گره‌های دیده‌شده */
+/* C(n,k) with a loop + explicit Stack (DFS). nodes = number of visited nodes */
 unsigned long binom_dfs(int n, int k, unsigned long *nodes)
 {
     unsigned long leaves = 0;
@@ -12,16 +11,16 @@ unsigned long binom_dfs(int n, int k, unsigned long *nodes)
         int kk = s_pop(), nn = s_pop();
         (*nodes)++;
         if (kk == 0 || kk == nn) {
-            leaves++;                                   /* برگ: مقدار ۱ */
+            leaves++;                                   /* leaf: value 1 */
         } else {
-            s_push(nn - 1); s_push(kk);                 /* فرزند راست (n-1, k)   */
-            s_push(nn - 1); s_push(kk - 1);             /* فرزند چپ  (n-1, k-1)  */
+            s_push(nn - 1); s_push(kk);                 /* right child (n-1, k)   */
+            s_push(nn - 1); s_push(kk - 1);             /* left child  (n-1, k-1) */
         }
     }
     return leaves;
 }
 
-/* C(n,k) با حلقه + Queue (BFS) */
+/* C(n,k) with a loop + Queue (BFS) */
 unsigned long binom_bfs(int n, int k, unsigned long *nodes)
 {
     unsigned long leaves = 0;
@@ -33,8 +32,8 @@ unsigned long binom_bfs(int n, int k, unsigned long *nodes)
         if (kk == 0 || kk == nn) {
             leaves++;
         } else {
-            q_push(nn - 1); q_push(kk - 1);             /* فرزند چپ  */
-            q_push(nn - 1); q_push(kk);                 /* فرزند راست */
+            q_push(nn - 1); q_push(kk - 1);             /* left child  */
+            q_push(nn - 1); q_push(kk);                 /* right child */
         }
     }
     return leaves;
@@ -56,7 +55,7 @@ int main(void)
                n, k, by_dfs, nodes_dfs, s_max / 2, q_max / 2,
                (by_dfs == by_bfs && nodes_dfs == nodes_bfs) ? "(same)" : "(DIFFERENT!)");
 
-        s_top = s_max = 0;  q_head = q_size = q_max = 0;      /* بازنشانی برای آزمایش بعد */
+        s_top = s_max = 0;  q_head = q_size = q_max = 0;      /* reset for the next experiment */
     }
     return 0;
 }

@@ -1,16 +1,15 @@
-
 #include <stdio.h>
 
 static unsigned long calls;
 
-/* الگوریتم ۱: بازگشتی، مستقیماً از قاعدهٔ پاسکال */
+/* algorithm 1: recursive, straight from Pascal's rule */
 unsigned long long binom(int n, int k)
 {
     calls++;
     return (k == 0 || k == n) ? 1ULL : binom(n - 1, k - 1) + binom(n - 1, k);
 }
 
-/* الگوریتم ۲: حلقه، همان تابع */
+/* algorithm 2: a loop, same function */
 unsigned long long binom_loop(int n, int k)
 {
     unsigned long long r = 1;

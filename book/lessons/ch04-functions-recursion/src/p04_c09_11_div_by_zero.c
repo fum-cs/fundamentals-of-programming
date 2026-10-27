@@ -1,6 +1,5 @@
-
 #include <stdio.h>
-#define uint    unsigned int
+typedef unsigned int uint;
 
 uint inc(uint a){ return ++a; }
 uint dec(uint a){ return --a; }
@@ -11,6 +10,6 @@ int main(void){
     printf("div(23, 4) = %u\n", div(23, 4));
     printf("about to compute div(5, 0) ...\n");
     fflush(stdout);
-    printf("div(5, 0)  = %u\n", div(5, 0));      /* هرگز به پایه نمی‌رسد */
+    printf("div(5, 0)  = %u\n", div(5, 0));      /* never reaches the base case */
     return 0;
 }

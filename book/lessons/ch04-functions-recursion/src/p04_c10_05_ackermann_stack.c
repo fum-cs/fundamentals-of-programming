@@ -1,14 +1,13 @@
-
 #include <stdio.h>
 #include "adt.h"
 
-/* نسخهٔ بازگشتی، برای مقایسه */
+/* recursive version, for comparison */
 unsigned long ack_rec(unsigned long m, unsigned long n)
 {
     return m == 0 ? n + 1 : n == 0 ? ack_rec(m - 1, 1) : ack_rec(m - 1, ack_rec(m, n - 1));
 }
 
-/* نسخهٔ حلقه + Stack صریح؛ steps = تعداد دفعات اجرای حلقه */
+/* loop + explicit Stack version; steps = number of loop iterations */
 unsigned long ack_iter(unsigned long m, unsigned long n, unsigned long *steps)
 {
     s_top = s_max = 0;

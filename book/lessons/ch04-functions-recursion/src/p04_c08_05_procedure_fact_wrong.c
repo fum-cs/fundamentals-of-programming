@@ -1,8 +1,7 @@
-
 #include <stdio.h>
 
-int  n;                      /* «ورودی» رویه */
-long result;                 /* «خروجی» رویه */
+int  n;                      /* the procedure's "input" */
+long result;                 /* the procedure's "output" */
 
 void fact_proc(void)
 {
@@ -10,9 +9,9 @@ void fact_proc(void)
         result = 1;
         return;
     }
-    n = n - 1;               /* می‌خواهیم برای n-1 حل کنیم ... */
-    fact_proc();             /* ... پس خودمان را صدا می‌زنیم */
-    result = result * n;     /* و حالا می‌خواهیم در n «اصلی» ضرب کنیم */
+    n = n - 1;               /* we want to solve for n-1 ... */
+    fact_proc();             /* ... so we call ourselves */
+    result = result * n;     /* now we want to multiply by the ORIGINAL n */
 }
 
 int main(void)

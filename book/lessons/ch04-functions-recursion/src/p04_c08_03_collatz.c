@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 
 int main(void)
@@ -9,10 +8,10 @@ int main(void)
         unsigned long long n = tests[t];
         int steps = 0;
 
-        while (n != 1) {                      /* تکرار  */
-            if (n % 2 == 0) n = n / 2;        /* انتخاب */
+        while (n != 1) {                      /* repetition */
+            if (n % 2 == 0) n = n / 2;        /* selection  */
             else            n = 3 * n + 1;
-            steps++;                          /* ترتیب  */
+            steps++;                          /* sequence   */
         }
         printf("s(%2d) = %d steps\n", tests[t], steps);
     }
