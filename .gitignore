@@ -11,3 +11,6 @@ __pycache__/
 .venv/
 # MyST build outputs
 _build
+_sources/
+*.pt
+*.pkl
