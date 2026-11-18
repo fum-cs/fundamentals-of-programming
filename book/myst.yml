@@ -11,7 +11,7 @@ project:
     - file: index.md    
     - title: بخش اول | مبانی و مقدمات
       children:
-        - file: parts/p01-basics/part-one.md
+        - file: parts/p01-basics/part-one.ipynb
     - title: بخش دوم | داده‌ها و عملگرها
       children:
         - file: parts/p02-data-operators/part-two.ipynb
