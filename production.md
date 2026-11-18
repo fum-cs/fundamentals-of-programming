@@ -1,111 +1,95 @@
-# Production
+# انتشار (Production)
 
-Instructions for building the course book. Students can use the pre-compiled site and do not need this.
+راهنمای ساخت و انتشار کتاب درس. دانشجویان می‌توانند از سایت منتشرشده استفاده
+کنند و به این راهنما نیازی ندارند.
 
-## Generate the online book
+## ساخت کتاب آنلاین
 
-The book is built with **Jupyter Book 2** (MyST engine). This repo started
-directly on v2 — there is no legacy Jupyter Book 1 config here.
+کتاب با **Jupyter Book 2** (موتور MyST) ساخته می‌شود. تمام تنظیمات در یک فایل
+`myst.yml` در ریشه‌ی مخزن است: متادیتا، وابستگی‌های سازمانی، گزینه‌های سایت
+(لوگو، استایل) و فهرست مطالب صریح. صفحه‌ی آغازین `book/index.md` است و بخش‌ها
+در `book/parts/` قرار دارند.
 
-Install v2:
+نصب:
 
-```
-pip install jupyter-book        # v2.x — wraps the MyST engine
-# or: npm install -g mystmd
-```
-
-On this workstation, `jupyter-book` 2.1.7 lives in the `pytorch` env:
-`/data/python-envs/pytorch/bin/jupyter-book`.
-
-All configuration lives in a single `myst.yml` at the repository root:
-metadata (title, author, copyright, logo, favicon), exports, and the table of
-contents. The cover page is `lectures/index.md`.
-
-Build the static site from the repository root (not from `lectures/`):
-
-```
-jupyter book build --html
+```bash
+pip install jupyter-book            # نسخه‌ی ۲ — پوششی روی موتور MyST
+# یا: npm install -g jupyter-book   (همان چیزی که CI استفاده می‌کند)
 ```
 
-Gotcha: if your shell exports `PORT` (this one has `PORT=0`), unset it for the
-build — MyST reads `PORT` and the static export then tries to fetch pages from
-`http://localhost:0` and fails:
+بیلد از ریشه‌ی مخزن:
 
+```bash
+jupyter book build --html           # خروجی: _build/html/
 ```
+
+نکته: اگر شل شما متغیر `PORT` را export می‌کند (مثلاً `PORT=0`)، آن را برای بیلد
+حذف کنید؛ MyST این متغیر را می‌خواند و خروجی استاتیک سعی می‌کند صفحه‌ها را از
+`http://localhost:0` بگیرد و شکست می‌خورد:
+
+```bash
 env -u PORT jupyter book build --html
 ```
 
-The site is written to `_build/html/`.
+نوت‌بوک‌ها هنگام بیلد **اجرا نمی‌شوند** و از خروجی‌های ذخیره‌شده استفاده
+می‌شود. برای اجرای آن‌ها: `jupyter book build --html --execute`.
 
-### Deploying to GitHub Pages (automatic)
+## انتشار خودکار روی GitHub Pages
 
-Pushes to `main` are built and deployed by GitHub Actions — see
-`.github/workflows/deploy.yml` (it installs `jupyter-book` via npm, runs
-`jupyter-book build --html` with `BASE_URL=/fundamentals-of-programming`, and publishes
-to Pages). Nothing to do by hand; watch progress under the repo's **Actions**
-tab. The Pages *Source* setting must stay **GitHub Actions**.
+هر push به `main` توسط `.github/workflows/deploy.yml` بیلد و منتشر می‌شود
+(`jupyter-book` را با npm نصب می‌کند، `jupyter-book build --html` را با
+`BASE_URL=/<نام-مخزن>` اجرا می‌کند و روی Pages منتشر می‌کند). پیشرفت را در
+زبانه‌ی **Actions** ببینید. در *Settings → Pages* گزینه‌ی **Source** باید
+همیشه **GitHub Actions** باشد.
 
-### Serving the book locally
+Pull Requestها با `.github/workflows/build-check.yml` بررسی می‌شوند؛ همان بیلد
+را بدون انتشار اجرا می‌کند.
 
-Option A — live-reload dev server (rebuilds content as you edit):
+## اجرای محلی کتاب
 
-```
+با بازسازی خودکار هنگام ویرایش:
+
+```bash
 env -u PORT jupyter book start     # http://localhost:3000
 ```
 
-Option B — serve the already-built static site on any port:
+یا سرو کردن سایت استاتیکِ ساخته‌شده:
 
-```
+```bash
 cd _build/html
 python3 -m http.server 8811 --bind 127.0.0.1
 ```
 
-(The site is a JS-driven static site: always open it through a web server,
-not by double-clicking `index.html`.)
+سایت مبتنی بر JavaScript است: همیشه آن را از طریق وب‌سرور باز کنید، نه با
+دوبار کلیک روی `index.html`.
 
-### Stopping local servers
+## متوقف کردن سرورهای محلی
 
-If a server runs in a terminal, stop it with `Ctrl-C` there. Background
-servers can be found and killed by port:
+سرور را با `Ctrl-C` در همان ترمینال متوقف کنید. سرورهای پس‌زمینه:
 
-```
-ss -tlnp | grep -E ':(3000|3001|8811)'   # find listeners + PIDs
-kill <PID>                               # graceful
-kill -9 <PID>                            # if it ignores SIGTERM
-```
-
-One-liners:
-
-```
-fuser -k 3000/tcp              # free port 3000
-kill $(lsof -t -i:8811)        # free port 8811 (needs lsof)
+```bash
+ss -tlnp | grep -E ':(3000|3001|8811)'   # پیدا کردن پورت‌ها و PIDها
+kill <PID>                               # توقف نرم؛ اگر نشد: kill -9
+fuser -k 3000/tcp                        # یا آزاد کردن مستقیم یک پورت
+pkill -f "book-theme/server.js"          # سرور باقی‌مانده‌ی `jupyter book start`
 ```
 
-`jupyter book start` spawns a Node "book-theme" server; if one is left over:
+## روش دستی انتشار روی GitHub Pages
 
-```
-pkill -f "book-theme/server.js"
-pkill -f "myst"
-```
-
-### Manual fallback for GitHub Pages
-
-For a project site (https://fum-cs.github.io/fundamentals-of-programming/), rebuild with
-the correct base URL first, then push `_build/html`:
-
-```
+```bash
 BASE_URL=/fundamentals-of-programming/ env -u PORT jupyter book build --html
 pip install ghp-import
 ghp-import -n -p -f ./_build/html
 ```
 
-### PDF (optional)
+## خروجی PDF (اختیاری)
 
-Uncomment `- format: pdf` in `myst.yml` and run:
+یک export با `format: pdf` به `myst.yml` اضافه کنید و
+`env -u PORT jupyter book build --pdf` را اجرا کنید (خروجی PDF در نسخه‌ی ۲ از
+طریق Typst انجام می‌شود).
 
-```
-env -u PORT jupyter book build --pdf
-```
+## مثال‌های C و فایل‌های تولیدشده
 
-(PDF export in v2 goes through Typst. Notebooks are not executed by default —
-use `jupyter book build --html --execute` to run them.)
+بعضی نوت‌بوک‌ها هنگام اجرا فایل‌های `src/*.c` را می‌سازند و در `bin/` کامپایل
+می‌کنند. پوشه‌ی `src/` در گیت نگه داشته می‌شود؛ پوشه‌ی `bin/` (فایل‌های اجرایی
+کامپایل‌شده) خروجی بیلد است و نادیده گرفته می‌شود.
