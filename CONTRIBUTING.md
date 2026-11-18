@@ -1,45 +1,94 @@
-# Contributing — instructor & TA workflow
+# راهنمای مشارکت — مدرس، دستیاران آموزشی و دانشجویان
 
-This repository is co-managed by the instructor and TAs. These conventions
-keep the book buildable and the history reviewable.
+این مخزن را مدرس و دستیاران آموزشی (TA) مشترکاً مدیریت می‌کنند. رعایت این
+قواعد باعث می‌شود کتاب همیشه قابل بیلد بماند و تاریخچه‌ی تغییرات قابل بازبینی
+باشد.
 
-## Repository layout
+- **دانشجویان و خوانندگان:** اشکال‌ها را از طریق
+  [Issues](../../issues/new/choose) گزارش کنید (قالب «خطا در محتوا»).
+- **دستیاران آموزشی:** روی یک شاخه (branch) کار کنید و Pull Request بدهید؛
+  ادغام (merge) با مدرس است.
+
+## ساختار مخزن
 
 ```
-myst.yml                      # ALL book config: metadata + table of contents
-lectures/
-  index.md                    # book cover / landing page
-  NN-topic/                   # one folder per lecture
-    lecture-name.ipynb        # the lecture notebook (may be .md)
-    img/ or data files        # keep assets next to the lecture
-  img/                        # book-wide assets (logo, favicon)
-.github/workflows/deploy.yml  # Pages deployment (do not edit casually)
-production.md                 # build & serve instructions
+myst.yml                       # تمام تنظیمات کتاب: متادیتا + فهرست مطالب
+book/
+  index.md                     # صفحه‌ی آغازین
+  parts/pNN-topic/
+    part-xxx.ipynb             # نوت‌بوک بخش (در فهرست مطالب listed است)
+    part-xxx.md                # متن Markdown بخش
+    src/pNN_cCC_SS_name.c      # مثال‌های C (pNN = بخش، cCC = فصل، SS = ترتیب)
+    images/                    # تصاویر مخصوص همین بخش
+  images/                      # تصاویر عمومی کتاب
+.github/workflows/             # deploy.yml (انتشار) و build-check.yml (بررسی PR)
 ```
 
-## Adding a lecture
+## ویرایش یک بخش موجود
 
-1. Create `lectures/NN-topic/my-lecture.ipynb` (or `.md`), where `NN` follows
-   the lecture numbering (`10-functions`, …). Lowercase-hyphenated filenames.
-2. **Add it to `myst.yml`**: the TOC is explicit in v2 — a file not listed in
-   the TOC is not part of the book. Put it under the right `title:` group (add
-   a new group if it starts a new topic).
-3. Build locally to check before pushing:
+1. یک شاخه بسازید: `git switch -c <نام-شما>/<موضوع-کوتاه>`.
+2. بخش را ویرایش کنید. فایل‌های `part-xxx.md` و `part-xxx.ipynb` باید با هم
+   هماهنگ بمانند — سایت از `.ipynb`ی ساخته می‌شود که در `myst.yml` آمده است،
+   پس تغییری که فقط در `.md` داده شود روی سایت دیده نمی‌شود.
+3. اگر مثال C را تغییر دادید، هم فایل داخل `src/` و هم کد نمایش‌داده‌شده در متن
+   را به‌روز کنید و مطمئن شوید کامپایل می‌شود:
+   ```bash
+   gcc -std=c11 -Wall -Wextra -o /tmp/prog book/parts/<part>/src/<file>.c
    ```
-   env -u PORT jupyter book build --html
-   ```
-4. Push a branch and open a PR, or push to `main` directly for small fixes —
-   either way the site redeploys automatically.
+4. بیلد محلی بگیرید (پایین‌تر را ببینید) و سپس Pull Request باز کنید.
 
-## Rules of thumb
+## افزودن بخش یا فصل جدید
 
-- **Do not** commit build output (`_build/` is git-ignored) or
-  `.ipynb_checkpoints/`.
-- **Clear notebook outputs** before committing when outputs are bulky
-  (`jupyter nbconvert --clear-output --inplace file.ipynb`) — the site builds
-  from source; execution is opt-in (`jupyter book build --html --execute`).
-- Notebooks run top-to-bottom in order: keep cells executable and self-contained.
-- Keep lecture assets inside the lecture folder; book-wide images in
-  `lectures/img/`.
-- Branch protection and review: TAs open PRs; the instructor merges. (To be
-  enforced in repo settings.)
+1. فایل `book/parts/pNN-topic/part-xxx.ipynb` (و `.md` متناظر) را بسازید.
+   نام پوشه‌ها با حروف کوچک و با خط تیره است؛ `NN` شماره‌ی بخش است.
+2. **آن را به فهرست مطالب در `myst.yml` ریشه اضافه کنید.** فهرست مطالب صریح
+   است: فایلی که در آن نیامده باشد جزو کتاب نیست.
+3. نوت‌بوک را با front matter مخصوص MyST شروع کنید، مثل بقیه‌ی بخش‌ها
+   (عنوان + `authors`؛ مقدار `github:` فقط نام کاربری است، مثلاً `github: alireza-zarebidoki`).
+4. بخش را با «جمع‌بندی بخش» تمام کنید. در صورت تمایل، بخش «تیم تهیه و تدوین»
+   را به قالب بخش پنجم اضافه کنید.
+
+## قواعد نام‌گذاری
+
+- پوشه‌ی بخش‌ها: `p01-basics`، `p02-data-operators`، … ؛ نام فایل‌های داخلشان:
+  حروف کوچک و با خط تیره.
+- مثال‌های C: `pNN_cCC_SS_name.c`، مثلاً `p05_c12_03_bubble_sort.c`.
+- تصاویر کنار همان بخشی که از آن‌ها استفاده می‌کند (`images/`)؛ تصاویر عمومی
+  در `book/images/`.
+
+## خروجی بیلد و فایل‌های تولیدشده
+
+- **هرگز commit نکنید:** `_build/`، `.ipynb_checkpoints/`، `__pycache__/` و
+  فایل‌های اجرایی کامپایل‌شده (`book/parts/**/bin/`). همه در `.gitignore` هستند.
+- خروجی سلول‌های نوت‌بوک داخل خود فایل `.ipynb` ذخیره می‌شود و سایت همان را
+  نشان می‌دهد. نوت‌بوک را فقط وقتی دوباره اجرا کنید که کدش تغییر کرده، و از
+  commit کردن خروجی‌های بسیار حجیم پرهیز کنید (بخش چهارم الان حدود ۶ مگابایت است).
+
+## مراجع تکمیلی
+
+- شیوه‌ی نگارش فارسی، نیم‌فاصله، ترکیب متن راست‌به‌چپ و کد: [docs/style-guide.md](docs/style-guide.md)
+- الگوی شروع یک بخش جدید: [docs/part-template.md](docs/part-template.md)
+
+## بیلد و بررسی پیش از Pull Request
+
+```bash
+env -u PORT jupyter book build --html
+```
+
+workflow با نام *Build check* همین دستور را روی هر Pull Request اجرا می‌کند.
+workflow دیگری به نام *Check C examples* هم همه‌ی فایل‌های `src/*.c` را کامپایل
+می‌کند (مثال‌هایی که عمداً خطای نحوی دارند، مثل `*_error_syntax.c`، کنار گذاشته
+می‌شوند). PR فقط وقتی ادغام شود که هر دو بررسی سبز باشند.
+
+## Commit و Pull Request
+
+- commitهای کوچک و متمرکز با پیام روشن (مثلاً `part 5: fix binary search trace`).
+- هر PR فقط یک موضوع؛ توضیح دهید چه چیزی و در کدام فصل تغییر کرده است.
+- بازبین‌ها این موارد را بررسی می‌کنند: صحت علمی، کامپایل شدن کدها، نگارش
+  فارسی (ترکیب راست‌به‌چپ و چپ‌به‌راست) و اینکه فهرست مطالب همچنان بیلد می‌شود.
+
+## محافظت از شاخه‌ی main
+
+تنظیماتی که مدرس باید روی `main` فعال کند: الزام به Pull Request پیش از ادغام،
+الزام به سبز بودن بررسی‌های *Build check* و *Check C examples* و محدود کردن push مستقیم. جزئیات در
+`github-settings-checklist.md`.
