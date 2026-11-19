@@ -38,7 +38,9 @@ jobs:
       - name: Install Jupyter Book (via myst)
         run: npm install -g jupyter-book
       - name: Build HTML Assets
-        run: jupyter-book build --html
+        run: |
+          jupyter-book build --html
+          ls -la _build/html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
