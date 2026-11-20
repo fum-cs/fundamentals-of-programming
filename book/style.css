@@ -277,7 +277,7 @@ main div:has(> .myst-fm-author-col)::after {
 }
 
 main div:has(> .myst-fm-author-col)::before {
-  content: "SUPERVISOR · استاد راهنما";
+  content: "SUPERVISOR · استاد درس";
   order: 0;
 }
 
