@@ -33,6 +33,7 @@ project:
     - title: بخش هشتم | مباحث تکمیلی
       children:
         - file: book/parts/p08-misc/part-eight.ipynb
+          title: "بخش هشتم: مباحث تکمیلی"
 site:
   template: book-theme
   title: "مبانی کامپیوتر و برنامه‌سازی"
