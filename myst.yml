@@ -32,7 +32,7 @@ project:
         - file: book/parts/p07-structs-files/part-seven.ipynb
     - title: بخش هشتم | مباحث تکمیلی
       children:
-        - file: book/parts/p08-misc/part-eight.md
+        - file: book/parts/p08-misc/part-eight.ipynb
 site:
   template: book-theme
   title: "مبانی کامپیوتر و برنامه‌سازی"
