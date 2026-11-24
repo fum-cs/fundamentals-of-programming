@@ -1,3 +1,38 @@
+---
+title: "بخش دوم: داده‌ها و عملگرها"
+authors:
+  - name: دکتر محمود امین طوسی
+    affiliations:
+      - institution: دانشگاه فردوسی مشهد
+        department: گروه علوم کامپیوتر
+        country: ایران
+    email: m.amintoosi@gmail.com
+    github: mamintoosi
+    url: https://mamintoosi.github.io/
+    roles: [supervision]
+  - name: ملیکا محمدبیگی
+    affiliations:
+      - institution: دانشگاه فردوسی مشهد
+        department: گروه علوم کامپیوتر
+        country: ایران
+    github: eowyn2006
+    url: https://github.com/eowyn2006
+  - name: درسا عناصری
+    affiliations:
+      - institution: دانشگاه فردوسی مشهد
+        department: گروه علوم کامپیوتر
+        country: ایران
+    github: Anasori-Dorsa
+    url: https://github.com/Anasori-Dorsa
+  - name: زینب قاراچشمه
+    affiliations:
+      - institution: دانشگاه فردوسی مشهد
+        department: گروه علوم کامپیوتر
+        country: ایران
+    github: mbeygi569-ux
+    url: https://github.com/mbeygi569-ux
+---
+
 # بخش دوم : داده‌ها و عملگرها
 
 در برنامه‌نویسی، قبل از آن‌که بتوانیم مسئله‌ای را با شرط‌ها، حلقه‌ها یا توابع حل کنیم، باید بدانیم داده‌ها را چطور نمایش می‌دهیم و با آن‌ها چه عملیاتی انجام می‌دهیم. فرض کنید می‌خواهیم سن چند نفر را نگه داریم، میانگین نمره‌ای را حساب کنیم، از کاربر یک عدد بگیریم یا بررسی کنیم که یک مقدار زوج است یا فرد. برای انجام همین کارهای ساده هم باید بدانیم هر مقدار چه نوعی دارد، در حافظه چگونه نمایش داده می‌شود و عملگرهای زبان C دقیقاً چه نتیجه‌ای تولید می‌کنند.
@@ -22,8 +57,39 @@ int age = 20;
 
 در این دستور، `age` نام متغیر، `int` نوع داده و `20` مقدار اولیه‌ی آن است. نوع داده مشخص می‌کند مقدار چگونه تفسیر شود و چه بازه‌ای از مقدارها را می‌تواند نگه دارد؛ بنابراین انتخاب نوع مناسب، بخشی از حل مسئله است، نه صرفاً نوشتن دستور به شکل درست.
 
-> **نگاهی به یک دانشمند تأثیرگذار — دنیس ریچی (Dennis Ritchie):**
-> دنیس ریچی، دانشمند علوم کامپیوتر آمریکایی، زبان C را در آزمایشگاه Bell در اوایل دهه‌ی ۱۹۷۰ طراحی و توسعه داد. C ابتدا برای پیاده‌سازی بخش‌هایی از سیستم‌عامل Unix به کار رفت و به‌دلیل ترکیب نزدیکی به سخت‌افزار با قابلیت حمل و ساختار نسبتاً ساده، به یکی از زبان‌های اثرگذار در تاریخ برنامه‌نویسی تبدیل شد. بسیاری از مفاهیمی که در این بخش می‌آموزیم، در قالب زبان C و کتابخانه‌ی استاندارد آن به کار گرفته می‌شوند.
+▶ سلول زیر را اجرا کنید تا تغییر مقدار متغیر در خانه‌ی حافظه را ببینید.
+
+```python
+from IPython.display import HTML, display
+display(HTML(r"""
+<div id="mem-demo" style="direction:rtl;font-family:Vazirmatn,Tahoma,sans-serif;border:1px solid #d9e2ec;border-radius:14px;padding:16px;max-width:760px;background:#fbfdff;color:#182230">
+  <b>آزمایشگاه متغیر: مقدار کجا نگه‌داری می‌شود؟</b>
+  <p style="margin:8px 0">روی دکمه‌ها بزنید و تغییر مقدار متغیر را در خانه‌ی حافظه ببینید.</p>
+  <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+    <span style="background:#e8eefc;padding:8px 12px;border-radius:8px">نام: <b>age</b></span>
+    <span style="background:#e8eefc;padding:8px 12px;border-radius:8px">نوع: <b>int</b></span>
+    <span style="background:#e8eefc;padding:8px 12px;border-radius:8px">آدرس نمونه: <b>0x100</b></span>
+  </div>
+  <div style="margin:14px 0;padding:18px;border:2px dashed #7395c6;border-radius:12px;text-align:center">
+    <div style="font-size:13px;color:#52647a">خانه‌ی حافظه‌ی age</div>
+    <div id="mem-val" style="font-size:32px;font-weight:800;color:#315ca8">20</div>
+    <div id="mem-msg" style="font-size:13px;color:#52647a">int age = 20;</div>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button id="mem-init">مقداردهی اولیه: ۲۰</button><button id="mem-change">انتساب: ۲۱</button><button id="mem-reset">بازنشانی</button>
+  </div>
+  <style>#mem-demo button{border:0;border-radius:8px;padding:9px 13px;background:#315ca8;color:white;cursor:pointer}#mem-demo button:hover{filter:brightness(1.12)}</style>
+</div>
+<script>
+(()=>{const root=document.getElementById('mem-demo');if(!root)return;let v=20;
+const show=(msg)=>{root.querySelector('#mem-val').textContent=v;root.querySelector('#mem-msg').textContent=msg;};
+root.querySelector('#mem-init').onclick=()=>{v=20;show('int age = 20;  ← تعریف همراه با مقدار اولیه');};
+root.querySelector('#mem-change').onclick=()=>{v=21;show('age = 21;  ← مقدار همان خانه تغییر کرد');};
+root.querySelector('#mem-reset').onclick=()=>{v='—';show('int age;  ← هنوز مقداردهی نشده است');};
+})();
+</script>
+"""))
+```
 
 #### سه مفهوم که نباید با هم قاطی شوند: نام، نوع و مقدار
 
@@ -65,6 +131,29 @@ score = 20;      // Assignment: تغییر یا تعیین مقدار پس از 
 
 ```c
 printf("%zu\n", sizeof(int)); // معمولاً چاپ می‌کند: 4
+```
+
+▶ سلول زیر اندازه‌ی معمول چند نوع داده را به‌صورت شماتیک مقایسه می‌کند.
+
+```python
+from IPython.display import HTML, display
+display(HTML(r"""
+<div id="types-demo" style="direction:rtl;font-family:Vazirmatn,Tahoma,sans-serif;border:1px solid #d9e2ec;border-radius:14px;padding:16px;max-width:760px;background:#fbfdff;color:#182230">
+<b>نمایش شماتیک فضای ذخیره‌سازی نوع‌ها</b>
+<p style="margin:6px 0 12px">یک نوع را انتخاب کنید تا اندازه‌ی معمول آن در این مدل آموزشی برجسته شود. اندازه‌ی واقعی بعضی نوع‌ها به سیستم وابسته است.</p>
+<div style="display:flex;gap:8px;flex-wrap:wrap" id="type-btns">
+<button data-n="char">char</button><button data-n="int">int</button><button data-n="float">float</button><button data-n="double">double</button>
+</div>
+<div id="type-boxes" style="display:flex;gap:4px;margin:18px 0;flex-wrap:wrap"></div>
+<div id="type-caption" style="background:#eef4fb;padding:10px;border-radius:8px">int معمولاً ۴ بایت (۳۲ بیت) است.</div>
+<style>#types-demo button{border:1px solid #b7c8dc;border-radius:8px;padding:8px 14px;background:white;cursor:pointer}#types-demo button.active{background:#315ca8;color:white}#type-boxes span{width:36px;height:42px;border:1px solid #8aa7c9;border-radius:5px;background:#e8f0fb;display:grid;place-items:center;font-size:11px;color:#31527a}</style>
+</div>
+<script>
+(()=>{const r=document.getElementById('types-demo');if(!r)return;const info={char:[1,'یک بایت'],int:[4,'معمولاً ۴ بایت'],float:[4,'معمولاً ۴ بایت'],double:[8,'معمولاً ۸ بایت']};
+function pick(n){r.querySelectorAll('button').forEach(b=>b.classList.toggle('active',b.dataset.n===n));const [count,label]=info[n];r.querySelector('#type-boxes').innerHTML=Array.from({length:count},(_,i)=>`<span>${i+1}</span>`).join('');r.querySelector('#type-caption').textContent=`${n}: ${label} در این نمایش شماتیک (${count} خانه‌ی یک‌بایتی).`;}
+r.querySelectorAll('button').forEach(b=>b.onclick=()=>pick(b.dataset.n));pick('int');})();
+</script>
+"""))
 ```
 
 #### تفاوت `float` و `double`
@@ -195,8 +284,6 @@ int main(void) {
 
 > **پنجره‌ی بیشتر:** استاندارد رایج نمایش اعداد اعشاری در سخت‌افزار **IEEE 754** نام دارد.
 >
-> **نگاهی به یک دانشمند تأثیرگذار — ویلیام کاهان (William Kahan):**
-> کاهان، ریاضی‌دان و دانشمند علوم کامپیوتر کانادایی، از چهره‌های اصلی طراحی استاندارد IEEE 754 برای محاسبات ممیز شناور بود که به قابل‌پیش‌بینی‌تر شدن محاسبات اعشاری در رایانه‌ها کمک کرد.
 
 #### `char`، ASCII و Unicode: یک تفاوت مهم
 
@@ -211,9 +298,6 @@ printf("Next letter: %c\n", ch + 1);            // B
 دانستن سه کد پایه‌ی جدول ASCII در برنامه‌نویسی بسیار پرکاربرد است: `'0'` برابر `48`، `'A'` برابر `65` و `'a'` برابر `97` است (فاصله‌ی حروف بزرگ و کوچک انگلیسی همیشه `32` واحد است).
 
 همچنین توجه کنید که **متن فارسی را نمی‌توان با فرض «هر حرف = یک char» تحلیل کرد**. متن‌های Unicode معمولاً با رمزگذاری‌هایی مثل UTF-8 ذخیره می‌شوند و یک نویسه‌ی فارسی ممکن است ۲ بایت یا بیشتر اشغال کند.
-
-> **نگاهی به چهره‌های اثرگذار — رابرت بمر و جو بکر:**
-> **رابرت دبلیو. بمر (Robert W. Bemer)** از چهره‌های مهم در شکل‌گیری و گسترش استاندارد ASCII بود. با گسترش استفاده از زبان‌های گوناگون، **جو بکر (Joe Becker)** و همکارانش پروژه‌ی Unicode را پایه‌گذاری کردند تا نویسه‌های تمام زبان‌های جهان در یک استاندارد واحد پوشش داده شوند.
 
 ### 1.3 قواعد نام‌گذاری متغیرها
 
@@ -274,6 +358,27 @@ int main(void) {
     printf("%d\n", x + 1); // وارد محدوده‌ی Undefined Behavior می‌شود!
     return 0;
 }
+```
+
+▶ با شبیه‌ساز زیر سرریز یک عدد بدون علامت ۴ بیتی را قدم‌به‌قدم ببینید.
+
+```python
+from IPython.display import HTML, display
+display(HTML(r"""
+<div id="ov-demo" style="direction:rtl;font-family:Vazirmatn,Tahoma,sans-serif;border:1px solid #d9e2ec;border-radius:14px;padding:16px;max-width:760px;background:#fbfdff;color:#182230">
+<b>شبیه‌ساز سرریز ۴ بیتی بدون علامت</b>
+<p>برای نمایش ساده، بازه‌ی unsigned چهار بیتی از ۰ تا ۱۵ است. هر بار یک واحد اضافه کنید.</p>
+<div style="font-size:30px;font-weight:800;text-align:center;margin:12px" id="ov-dec">14</div>
+<div id="ov-bits" style="display:flex;justify-content:center;gap:6px;margin:10px"></div>
+<div id="ov-note" style="text-align:center;color:#52647a;margin:10px">1110₂ = 14₁₀</div>
+<div style="display:flex;justify-content:center;gap:8px"><button id="ov-add">+۱</button><button id="ov-reset">شروع دوباره</button></div>
+<style>#ov-demo button{border:0;border-radius:8px;padding:9px 16px;background:#315ca8;color:white;cursor:pointer}#ov-bits span{width:38px;height:38px;border-radius:8px;display:grid;place-items:center;background:#e6edf7;border:1px solid #a7b9cf;font-weight:bold}#ov-bits span.on{background:#315ca8;color:white}</style>
+</div>
+<script>
+(()=>{const r=document.getElementById('ov-demo');if(!r)return;let n=14;function draw(){r.querySelector('#ov-dec').textContent=n;const bits=n.toString(2).padStart(4,'0');r.querySelector('#ov-bits').innerHTML=bits.split('').map(x=>`<span class="${x==='1'?'on':''}">${x}</span>`).join('');r.querySelector('#ov-note').textContent=`${bits}₂ = ${n}₁₀`+(n===0?' — پس از ۱۵، مقدار به ۰ برگشت (پیمانه‌ی ۱۶).':'');}
+r.querySelector('#ov-add').onclick=()=>{n=(n+1)%16;draw()};r.querySelector('#ov-reset').onclick=()=>{n=14;draw()};draw();})();
+</script>
+"""))
 ```
 
 #### چطور بازه‌ی واقعی نوع‌ها را از خود C بپرسیم؟
@@ -357,6 +462,25 @@ double correct = (double)7 / 2; // نتیجه: 3.5 (ابتدا 7 به double ت�
 
 > **تله‌ی بسیار رایج (مراقب جای پرانتز باشید!):**
 > عبارت `(double)(7 / 2)` باز هم نتیجه را **`3.0`** می‌دهد! زیرا پرانتز باعث می‌شود اول تقسیم صحیح `7 / 2` انجام شود (که حاصلش `3` است) و سپس `3` به `3.0` تبدیل شود. برای گرفتن نتیجه اعشاری، حداقل یکی از عملوندها باید **قبل از تقسیم** تبدیل شود: `(double)7 / 2` یا `7.0 / 2`.
+
+▶ در شبیه‌ساز زیر جای تبدیل نوع را عوض کنید و نتیجه‌ی تقسیم را مقایسه کنید.
+
+```python
+from IPython.display import HTML, display
+display(HTML(r"""
+<div id="cast-demo" style="direction:rtl;font-family:Vazirmatn,Tahoma,sans-serif;border:1px solid #d9e2ec;border-radius:14px;padding:16px;max-width:760px;background:#fbfdff;color:#182230">
+<b>مسیر تبدیل نوع (Type Casting)</b>
+<p>عدد ۷ را به دو شکل به نوع اعشاری تبدیل کنید و تفاوت زمان تبدیل را ببینید.</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap"><button id="cast-before">تبدیل پیش از تقسیم</button><button id="cast-after">تبدیل پس از تقسیم</button></div>
+<div id="cast-flow" style="margin:14px 0;padding:14px;background:#eef4fb;border-radius:10px;line-height:2"> (double)7 / 2 → 7.0 / 2 → 3.5 </div>
+<div id="cast-result" style="font-size:24px;font-weight:800;color:#315ca8">نتیجه: 3.5</div>
+<style>#cast-demo button{border:0;border-radius:8px;padding:9px 12px;background:#315ca8;color:white;cursor:pointer}</style>
+</div>
+<script>
+(()=>{const r=document.getElementById('cast-demo');if(!r)return;r.querySelector('#cast-before').onclick=()=>{r.querySelector('#cast-flow').textContent='(double)7 / 2  →  7.0 / 2  →  تقسیم اعشاری';r.querySelector('#cast-result').textContent='نتیجه: 3.5';};r.querySelector('#cast-after').onclick=()=>{r.querySelector('#cast-flow').textContent='(double)(7 / 2)  →  ابتدا تقسیم صحیح: 3  →  سپس تبدیل به 3.0';r.querySelector('#cast-result').textContent='نتیجه: 3.0';};})();
+</script>
+"""))
+```
 
 #### تبدیل کاهشی و Integer Promotion
 
@@ -592,6 +716,24 @@ Favorite letter: A (Address: 0x7ff7bfe2f853)
 
 ### 2.3 عملگرهای محاسباتی، رابطه‌ای و منطقی
 
+▶ ورودی‌های جدول منطقی را تغییر دهید تا خروجی AND و OR را ببینید.
+
+```python
+from IPython.display import HTML, display
+display(HTML(r"""
+<div id="logic-demo" style="direction:rtl;font-family:Vazirmatn,Tahoma,sans-serif;border:1px solid #d9e2ec;border-radius:14px;padding:16px;max-width:760px;background:#fbfdff;color:#182230">
+<b>آزمایشگاه عملگرهای منطقی</b>
+<p>مقدار A و B را تغییر دهید؛ خروجی AND و OR بلافاصله به‌روز می‌شود.</p>
+<div style="display:flex;gap:20px;flex-wrap:wrap"><label>A: <select id="la"><option value="0">۰ (false)</option><option value="1">۱ (true)</option></select></label><label>B: <select id="lb"><option value="0">۰ (false)</option><option value="1">۱ (true)</option></select></label></div>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px"><div class="lg">A && B <b id="land">0</b></div><div class="lg">A || B <b id="lor">0</b></div><div class="lg">!A <b id="lnot">1</b></div></div>
+<style>#logic-demo select{padding:7px;border:1px solid #a7b9cf;border-radius:7px}#logic-demo .lg{background:#eaf1fb;border-radius:9px;padding:12px 18px;min-width:110px}#logic-demo .lg b{display:block;font-size:24px;color:#315ca8}</style>
+</div>
+<script>
+(()=>{const r=document.getElementById('logic-demo');if(!r)return;function update(){const a=+r.querySelector('#la').value,b=+r.querySelector('#lb').value;r.querySelector('#land').textContent=a&&b?1:0;r.querySelector('#lor').textContent=a||b?1:0;r.querySelector('#lnot').textContent=a?0:1;}r.querySelectorAll('select').forEach(x=>x.onchange=update);update();})();
+</script>
+"""))
+```
+
 #### عملگرهای محاسباتی (Arithmetic)
 
 | عملگر | معنی | مثال و نکته |
@@ -647,8 +789,7 @@ int main(void) {
 
 برای ترکیب چند شرط با هم استفاده می‌شوند:
 
-> **نگاهی به یک دانشمند تأثیرگذار — جورج بول (George Boole):**
-> جورج بول، ریاضی‌دان انگلیسی، در قرن نوزدهم جبر بولی را صورت‌بندی کرد؛ دستگاهی ریاضی که در آن گزاره‌ها و مقدارهای درست و نادرست با عملگرهایی مانند AND، OR و NOT ترکیب می‌شوند. بعدها **کلود شنون (Claude Shannon)** نشان داد که می‌توان از همین جبر برای تحلیل مدارهای کلیدزنی و دیجیتال استفاده کرد. به همین دلیل، منطق بولی هم در برنامه‌نویسی و هم در طراحی سخت‌افزار اهمیت بنیادی دارد.
+
 
 | عملگر | معنی | مثال |
 |:---:|---|---|
@@ -710,7 +851,7 @@ int b = ++x; // Prefix: ابتدا x یک واحد زیاد می‌شود (می�
 
 عملگرهای بیتی مستقیماً روی تک‌تک بیت‌های نمایش دودویی اعداد صحیح کار می‌کنند.
 
-> **پیوند تاریخی:** کلود شنون در پایان‌نامه‌ی کارشناسی ارشد خود در سال ۱۹۳۷ نشان داد که جبر بولی جورج بول می‌تواند رفتار مدارهای رله‌ای و کلیدزنی را توصیف کند. عملگرهای بیتی در C به ما اجازه می‌دهند در سطح برنامه با همین الگوهای صفر و یک کار کنیم.
+
 
 | عملگر | نام | ایده‌ی ساده |
 |:---:|---|---|
@@ -725,6 +866,25 @@ int b = ++x; // Prefix: ابتدا x یک واحد زیاد می‌شود (می�
 برای مثال، اگر `a = 2` (`0010`) و `b = 4` (`0100`) باشند:
 * `a && b` برابر **`1`** است (چون هر دو غیرصفرند).
 * `a & b` برابر **`0`** است (چون هیچ بیتی در جایگاه مشترک هر دو `1` نیست).
+
+▶ عملگرهای بیتی را روی دو عدد نمونه اجرا کنید.
+
+```python
+from IPython.display import HTML, display
+display(HTML(r"""
+<div id="bit-demo" style="direction:rtl;font-family:Vazirmatn,Tahoma,sans-serif;border:1px solid #d9e2ec;border-radius:14px;padding:16px;max-width:760px;background:#fbfdff;color:#182230">
+<b>ماشین عملگرهای بیتی</b>
+<p>دو عدد ۵ و ۳ را با AND، OR و XOR ترکیب کنید.</p>
+<div style="display:flex;gap:8px;flex-wrap:wrap"><button data-op="&">AND (&)</button><button data-op="|">OR (|)</button><button data-op="^">XOR (^)</button></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:14px 0;text-align:center"><div class="bitcard">۵<small>0101</small></div><div class="bitcard">۳<small>0011</small></div><div class="bitcard" id="bit-out">۱<small>0001</small></div></div>
+<div id="bit-explain" style="background:#eef4fb;padding:10px;border-radius:8px">AND: فقط بیت‌هایی روشن می‌مانند که در هر دو ورودی ۱ باشند.</div>
+<style>#bit-demo button{border:0;border-radius:8px;padding:9px 14px;background:#315ca8;color:white;cursor:pointer}.bitcard{padding:12px;background:#eaf1fb;border-radius:9px;font-size:22px;font-weight:bold}.bitcard small{display:block;font-size:15px;letter-spacing:4px;color:#52647a}</style>
+</div>
+<script>
+(()=>{const r=document.getElementById('bit-demo');if(!r)return;const data={'&':[1,'0001','AND: فقط بیت‌هایی روشن می‌مانند که در هر دو ورودی ۱ باشند.'],'|':[7,'0111','OR: هر بیتی که دست‌کم در یکی از ورودی‌ها ۱ باشد، روشن می‌شود.'],'^':[6,'0110','XOR: بیت‌های متفاوت ۱ و بیت‌های یکسان ۰ می‌شوند.']};r.querySelectorAll('button').forEach(b=>b.onclick=()=>{const [v,bits,msg]=data[b.dataset.op];r.querySelector('#bit-out').innerHTML=`${v}<small>${bits}</small>`;r.querySelector('#bit-explain').textContent=msg;});})();
+</script>
+"""))
+```
 
 #### عمل روی بیت‌ها؛ با چشم ببینیم
 
@@ -773,6 +933,25 @@ int main(void) {
      int a, b, c;
      a = b = c = 10; // به‌صورت a = (b = (c = 10)) تفسیر می‌شود؛ همگی 10 می‌شوند
      ```
+
+▶ مراحل گروه‌بندی یک عبارت را در شبیه‌ساز زیر دنبال کنید.
+
+```python
+from IPython.display import HTML, display
+display(HTML(r"""
+<div id="prec-demo" style="direction:rtl;font-family:Vazirmatn,Tahoma,sans-serif;border:1px solid #d9e2ec;border-radius:14px;padding:16px;max-width:760px;background:#fbfdff;color:#182230">
+<b>ردیابی اولویت عملگرها</b>
+<p>عبارت زیر را مرحله‌به‌مرحله باز کنید:</p>
+<div style="font-family:monospace;direction:ltr;text-align:center;font-size:20px;background:#eef4fb;padding:12px;border-radius:8px">2 + 3 * 4</div>
+<div id="prec-step" style="margin:12px 0;min-height:46px;text-align:center;font-size:17px">گام ۱: ضرب اولویت بیشتری از جمع دارد.</div>
+<div style="display:flex;gap:8px;justify-content:center"><button id="prec-next">گام بعد</button><button id="prec-reset">از اول</button></div>
+<style>#prec-demo button{border:0;border-radius:8px;padding:9px 14px;background:#315ca8;color:white;cursor:pointer}</style>
+</div>
+<script>
+(()=>{const r=document.getElementById('prec-demo');if(!r)return;const steps=['گام ۱: ضرب اولویت بیشتری از جمع دارد.','گام ۲: ابتدا 3 * 4 محاسبه می‌شود و برابر 12 است.','گام ۳: عبارت به 2 + 12 تبدیل می‌شود.','نتیجه‌ی نهایی: 14'];let i=0;const show=()=>r.querySelector('#prec-step').textContent=steps[i];r.querySelector('#prec-next').onclick=()=>{i=Math.min(i+1,steps.length-1);show()};r.querySelector('#prec-reset').onclick=()=>{i=0;show()};show();})();
+</script>
+"""))
+```
 
 #### جدول فشرده‌ی اولویت عملگرهای مهم (از بالا به پایین)
 
@@ -1007,19 +1186,296 @@ INT_MAX + 1
 
 ---
 
+## پاسخ‌نامه‌ی تمرین‌ها و مرورها
+
+پاسخ‌ها در بخش‌های بازشونده قرار گرفته‌اند تا ابتدا بتوانید مستقل فکر کنید و سپس راه‌حل را ببینید.
+
+### پاسخ تمرین‌های فصل ۱
+
+<details><summary>تمرین ۱ — محاسبه‌ی سن</summary>
+
+```c
+int age;
+scanf("%d", &age);
+double result = (double)age * 2.0;
+printf("%.1f\n", result);
+```
+تبدیل صریح، مقدار صحیح را پیش از ضرب به `double` تبدیل می‌کند.
+</details>
+
+<details><summary>تمرین ۲ — رشد باکتری و کشف Overflow</summary>
+
+برای مشاهده‌ی رفتار قابل‌پیش‌بینی سرریز، از `unsigned int` استفاده کنید:
+
+```c
+#include <stdio.h>
+int main(void) {
+    unsigned int x = 1;
+    for (int i = 0; i < 32; i++) {
+        printf("%u\n", x);
+        x *= 2u;
+    }
+    return 0;
+}
+```
+سرریز `int` علامت‌دار در C رفتار تعریف‌نشده دارد؛ بنابراین نتیجه‌ی آن قابل تضمین نیست. محاسبات `unsigned` پیمانه‌ای‌اند.
+</details>
+
+<details><summary>تمرین ۳ — مبدل فارنهایت به سلسیوس</summary>
+
+```c
+double f, c;
+scanf("%lf", &f);
+c = (f - 32.0) * 5.0 / 9.0;
+printf("%.2f\n", c);
+```
+</details>
+
+<details><summary>تمرین ۴ — محاسبه‌گر BMI</summary>
+
+```c
+double height, weight;
+scanf("%lf %lf", &height, &weight);
+double bmi = weight / (height * height);
+printf("BMI = %.2f\n", bmi);
+```
+قد بر حسب متر و وزن بر حسب کیلوگرم است؛ در برنامه‌ی کامل باید مثبت بودن قد نیز بررسی شود.
+</details>
+
+<details><summary>تمرین ۵ — شکار خطا: نوع داده‌ی نامناسب</summary>
+
+```c
+int average = 17.8;       // به 17 تبدیل می‌شود.
+char grade = 'A';         // کاراکتر با کوتیشن تکی
+double pi = 3.141592653589793;
+printf("%d %c %.15f\n", average, grade, pi);
+```
+`"A"` رشته است، اما `'A'` یک کاراکتر است. انتساب `17.8` به `int` بخش اعشاری را حذف می‌کند.
+</details>
+
+<details><summary>تمرین ۶ — مقایسه‌ی float و double</summary>
+
+```c
+float f = 1.0f / 3.0f;
+double d = 1.0 / 3.0;
+printf("float: %.9g\ndouble: %.17g\n", f, d);
+```
+`double` معمولاً دقت بیشتری از `float` دارد.
+</details>
+
+<details><summary>تمرین ۷ — بازه‌ی نوع‌ها با limits.h</summary>
+
+```c
+#include <stdio.h>
+#include <limits.h>
+int main(void) {
+    printf("CHAR_BIT=%d\nINT_MIN=%d\nINT_MAX=%d\nUINT_MAX=%u\n",
+           CHAR_BIT, INT_MIN, INT_MAX, UINT_MAX);
+    printf("int bits=%zu\n", sizeof(int) * CHAR_BIT);
+    return 0;
+}
+```
+</details>
+
+<details><summary>پاسخ Retrieval Practice فصل ۱</summary>
+
+1. Declaration معرفی متغیر؛ Initialization مقداردهی هنگام تعریف؛ Assignment تعیین یا تغییر مقدار پس از تعریف است.
+2. اندازه‌ی دقیق `int` به پیاده‌سازی وابسته است.
+3. مبنا فقط نمایش را تغییر می‌دهد، نه مقدار ریاضی را؛ وزن جایگاه‌ها توان‌های مبنا هستند.
+4. `signed` مقادیر منفی و مثبت و `unsigned` مقادیر غیرمنفی را نمایش می‌دهد. سرریز signed تعریف‌نشده و سرریز unsigned پیمانه‌ای است.
+5. `const` یک شیء دارای نوع تعریف می‌کند؛ `#define` جایگزینی متنی پیش‌پردازنده است.
+6. تبدیل ضمنی را قواعد زبان انجام می‌دهند؛ تبدیل صریح با cast مانند `(double)x` نوشته می‌شود.
+</details>
+
+### پاسخ تمرین‌های فصل ۲
+
+<details><summary>تمرین ۱ — بررسی دو عدد</summary>
+
+```c
+int a, b;
+scanf("%d %d", &a, &b);
+int bothPositive = (a > 0) && (b > 0);
+int sum = (a + b) * bothPositive;
+int safeDivisor = b + (b == 0);
+int remainder = (a % safeDivisor) * bothPositive;
+printf("both positive: %d\nsum: %d\nremainder: %d\n",
+       bothPositive, sum, remainder);
+```
+از `&&` و عملگر شرطی استفاده شده و `if` یا `else` نداریم. شرط `b != 0` از باقی‌مانده‌گیری بر صفر جلوگیری می‌کند.
+</details>
+
+<details><summary>تمرین ۲ — سیستم بررسی PIN</summary>
+
+```c
+#include <stdio.h>
+int main(void) {
+    const int correctPin = 1234;
+    int enteredPin;
+    scanf("%d", &enteredPin);
+    int ok = enteredPin == correctPin;
+    printf("%s\n", ok ? "ورود موفق" : "PIN اشتباه است");
+    return 0;
+}
+```
+مقایسه مقدار `0` یا `1` می‌دهد و `?:` پیام مناسب را انتخاب می‌کند.
+</details>
+
+<details><summary>تمرین ۳ — دستگاه خودپرداز</summary>
+
+```c
+int amount;
+scanf("%d", &amount);
+int notes100 = amount / 100000;
+amount %= 100000;
+int notes10 = amount / 10000;
+amount %= 10000;
+printf("100000: %d\n10000: %d\nremaining: %d\n",
+       notes100, notes10, amount);
+```
+برای `870000`، تعداد اسکناس‌ها به‌ترتیب ۸ و ۷ است.
+</details>
+
+<details><summary>تمرین ۴ — تبدیل ثانیه به ساعت، دقیقه و ثانیه</summary>
+
+```c
+int total;
+scanf("%d", &total);
+int h = total / 3600;
+int m = (total % 3600) / 60;
+int sec = total % 60;
+printf("%02d:%02d:%02d\n", h, m, sec);
+```
+برای `3725` خروجی `01:02:05` است.
+</details>
+
+<details><summary>تمرین ۵ — تعویض دو متغیر با XOR</summary>
+
+```c
+a ^= b;
+b ^= a;
+a ^= b;
+```
+از خاصیت‌های XOR استفاده می‌شود. دو متغیر باید دو شیء جدا باشند؛ در کد واقعی روش متغیر کمکی معمولاً خواناتر است.
+</details>
+
+<details><summary>تمرین ۶ — بررسی سال کبیسه</summary>
+
+```c
+int year;
+scanf("%d", &year);
+int leap = (year % 400 == 0) ||
+           ((year % 4 == 0) && (year % 100 != 0));
+printf("%d\n", leap);
+```
+</details>
+
+<details><summary>تمرین ۷ — کالبدشکافی ورودی/خروجی</summary>
+
+```c
+scanf("%lf", &y);   // double در scanf
+printf("%f\n", y);  // double در printf
+scanf("%d", &x);    // آدرس x
+scanf(" %c", &c);   // رد کردن whitespace قبلی
+```
+چهار ایراد: format نامناسب برای `double` در scanf، قالب نادرست برای چاپ مقدار double، ندادن آدرس `x`، و احتمال خواندن newline با `%c`.
+</details>
+
+<details><summary>تمرین ۸ — Debug by Warning</summary>
+
+```c
+printf("count=%d ratio=%f\n", count, ratio);
+```
+برای `int` از `%d` و برای `double` در `printf` از `%f` استفاده می‌شود.
+</details>
+
+<details><summary>تمرین ۹ — Decode بیت‌ماسک</summary>
+
+عدد ۵ در دودویی `0101` است؛ پس بیت صفر (خواندن) و بیت دو (اجرا) روشن و بیت یک (نوشتن) خاموش است.
+
+```c
+unsigned int p = 5;
+printf("read=%d\n",   (p & (1u << 0)) != 0);
+printf("write=%d\n",  (p & (1u << 1)) != 0);
+printf("execute=%d\n",(p & (1u << 2)) != 0);
+```
+</details>
+
+<details><summary>تمرین ۱۰ — سؤال مفهومی</summary>
+
+| عبارت | دسته‌بندی | دلیل |
+|---|---|---|
+| `5 / 2` | ایمن و واضح | تقسیم صحیح؛ نتیجه ۲ |
+| `5.0 / 2` | ایمن و واضح | تقسیم اعشاری؛ نتیجه ۲٫۵ |
+| `(double)(5 / 2)` | قابل اجرا ولی گمراه‌کننده | ابتدا نتیجه‌ی صحیح ۲ محاسبه و سپس ۲٫۰ می‌شود |
+| `(double)5 / 2` | ایمن و واضح | تبدیل پیش از تقسیم؛ نتیجه ۲٫۵ |
+| `INT_MAX + 1` | رفتار تعریف‌نشده | سرریز signed در C تعریف نشده است |
+</details>
+
+<details><summary>پاسخ Retrieval Practice فصل ۲</summary>
+
+1. `printf` خروجی را چاپ می‌کند؛ `scanf` ورودی را می‌خواند. `&` معمولاً آدرس مقصد را می‌دهد.
+2. در `printf` برای هر دو `float` و `double` از `%f` استفاده می‌شود؛ در `scanf` برای `float` از `%f` و برای `double` از `%lf`.
+3. `5 / 2` تقسیم صحیح و برابر ۲ است؛ `5.0 / 2` تقسیم اعشاری و برابر ۲٫۵ است.
+4. `&&` و `||` منطقی و کوتاه‌مدارند؛ `&` و `|` بیتی‌اند.
+5. در `A && B` با صفر بودن A، و در `A || B` با غیرصفر بودن A، بخش B اجرا نمی‌شود.
+6. عملگر منطقی نتیجه‌ی صفر یا یک می‌دهد؛ عملگر بیتی هر بیت را جداگانه پردازش می‌کند.
+7. Precedence اولویت عملگرها و Associativity گروه‌بندی عملگرهای هم‌اولویت را مشخص می‌کند.
+</details>
+
+<details><summary>پاسخ Retrieval Practice جامع بخش دوم</summary>
+
+1. نوع `double` و قالب `%.2f` مناسب است.
+2. اگر تقسیم دو `int` پیش از انتساب انجام شود، بخش اعشاری حذف شده و تبدیل بعدی آن را بازنمی‌گرداند.
+3. هر رقم هگزادسیمال را به معادل چهار بیتی‌اش تبدیل می‌کنیم.
+4. چون `scanf` بر اساس قالب، نوع داده‌ی مورد انتظار برای نوشتن در آدرس مقصد را تعیین می‌کند.
+5. منطق درست/نادرست بودن شرط را می‌سنجد؛ عملگر بیتی الگوی بیت‌های عدد را پردازش می‌کند.
+6. برای عبارت‌های پیچیده یا چند عملگر هم‌اولویت، پرانتز خوانایی و وضوح را بیشتر می‌کند.
+</details>
+
+<details><summary>پاسخ تمرین نهایی بخش دوم</summary>
+
+```c
+#include <stdio.h>
+int main(void) {
+    unsigned int n;
+    scanf("%u", &n);
+    printf("parity: %s\n", (n & 1u) ? "odd" : "even");
+    printf("original: %u\n", n);
+    printf("doubled: %u\n", n << 1);
+    return 0;
+}
+```
+بیت کم‌ارزش عدد فرد ۱ و عدد زوج ۰ است؛ بنابراین `n & 1` زوج یا فرد بودن را مشخص می‌کند. شیفت چپ یک‌جایگاهی برای مقدار unsigned، در صورت نبود سرریز، معادل ضرب در ۲ است.
+</details>
+
+## دانشمندان و چهره‌های اثرگذار
+
+| نام | سال زندگی | اثر و نقش مرتبط با مباحث |
+|---|---:|---|
+| **دنیس ریچی (Dennis Ritchie)** | ۱۹۴۱–۲۰۱۱ | طراح زبان C و از سازندگان سیستم‌عامل Unix. |
+| **ویلیام کاهان (William Kahan)** | ۱۹۳۳– | از چهره‌های اصلی طراحی استاندارد IEEE 754 برای محاسبات ممیز شناور. |
+| **رابرت بمر (Robert W. Bemer)** | ۱۹۲۰–۲۰۰۴ | از پیشگامان استاندارد ASCII و از مشارکت‌کنندگان مهم در کدگذاری نویسه‌ها. |
+| **جو بکر (Joe Becker)** | سال‌های زندگی در منابع رسمی بررسی‌شده درج نشده | از بنیان‌گذاران تلاش برای ایجاد استاندارد Unicode و نویسنده‌ی پیشنهاد Unicode 88. |
+| **جورج بول (George Boole)** | ۱۸۱۵–۱۸۶۴ | صورت‌بندی‌کننده‌ی جبر بولی؛ پایه‌ی نظری عملگرهای AND، OR و NOT. |
+| **کلود شنون (Claude Shannon)** | ۱۹۱۶–۲۰۰۱ | نشان داد جبر بولی چگونه برای تحلیل مدارهای کلیدزنی و دیجیتال به کار می‌رود؛ از بنیان‌گذاران نظریه‌ی اطلاعات. |
+
 ## تیم تهیه و تدوین
 
 ### اعضای تیم و تقسیم کار
 
-| **عضو تیم** | **نقش و مشارکت** |
-|:---:|---|
-| **ملیکا محمدبیگی** | تهیه‌ی پروتوتایپ و نسخه‌ی اولیه‌ی محتوا، شامل ساختار کلی مباحث و تمرین‌های اولیه؛ همچنین طراحی اولیه‌ی فایل تمرین‌ها، و در ادامه ساخت دو فرمت دیگر از همین فایل تمرین و بررسی آن‌ها برای اطمینان از یکسان بودن با فایل HTML اصلی |
-| **درسا عناصری** | بازبینی علمی و ویرایشی، توسعه و بهینه‌سازی ساختار آموزشی، افزودن/حذف و بازطراحی تمرین‌ها، افزودن نکات مفهومی و خطاهای رایج، و بررسی ایده‌های آموزشی مورد استفاده در منابع و دوره‌های دانشگاهی معتبر؛ همچنین بررسی علمی فایل تمرین‌ها، سنجش سختی سؤال‌ها و ارتباط آن‌ها با یکدیگر، یکسان‌سازی و مرتب‌سازی فایل تمرین‌ها، اضافه و کم کردن چندین سؤال، و افزودن تذکرات و نکاتی برای استاد تدریس‌کننده در برخی سؤال‌ها |
-| **زینب قاراچشمه** |  |
+| عضو تیم | نقش و مشارکت |
+|---|---|
+| **ملیکا محمدبیگی** | تهیه‌ی پروتوتایپ و نسخه‌ی اولیه‌ی محتوا، طراحی ساختار کلی مباحث و تدوین تمرین‌های اولیه؛ طراحی اولیه‌ی فایل تمرین‌ها، تهیه‌ی دو قالب دیگر از آن و بررسی تطابقشان با نسخه‌ی اصلی HTML. |
+| **درسا عناصری** | بازبینی علمی و ویرایشی محتوا، بهینه‌سازی ساختار آموزشی، بازطراحی و انتخاب تمرین‌ها، تدوین نکات مفهومی و خطاهای رایج، بررسی ایده‌های آموزشی منابع دانشگاهی معتبر و آماده‌سازی پرامپت‌های مربوط به یادگیری و نصب؛ بررسی علمی و سطح دشواری تمرین‌ها، سامان‌دهی فایل تمرین‌ها، افزودن نکات آموزشی برای مدرس و اصلاح نهایی فایل‌ها. |
+| **زینب قاراچشمه** | بهبود محتوای کارگاه بر پایه‌ی نسخه‌ی اولیه و همکاری در بازبینی علمی؛ جست‌وجوی منابع و مراجع آموزشی، یافتن و تطبیق تمرین‌های مفهومی، از جمله از مجموعه‌ی CSES، آماده‌سازی نهایی محتوای کارگاه و اصلاح نهایی فایل‌ها. |
 
 ### فرایند تولید و بازبینی
 
-محتوا از یک نسخه‌ی اولیه آغاز شد و سپس با تمرکز بر **صحت علمی، پیوستگی پیش‌نیاز/پس‌نیاز، تناسب با دانشجوی ترم اول، تنوع مثال‌ها، خطاهای رایج و تمرین‌های تشخیصی** توسعه یافت. در نسخه‌ی حاضر محدودیت تعداد جلسه حذف شده تا مدرس بتواند بر اساس سطح کلاس و زمان واقعی، بین «هسته‌ی اصلی» و «مطالب تکمیلی» انتخاب کند.
+تهیه‌ی این مجموعه با طراحی پروتوتایپ و تدوین نسخه‌ی اولیه‌ی محتوا آغاز شد. در ادامه، اعضای تیم با تقسیم وظایف، بخش‌های مختلف کار را توسعه دادند؛ از بازبینی علمی و ویرایش محتوا و بهینه‌سازی ساختار آموزشی گرفته تا جست‌وجوی منابع و مراجع یادگیری، انتخاب و بازطراحی تمرین‌ها و آماده‌سازی محتوای نهایی کارگاه.
+
+در این فرایند، تلاش شد مباحث از نظر علمی دقیق و از نظر آموزشی منسجم باشند و با سطح دانشجویان ترم اول تناسب داشته باشند. همچنین مثال‌ها و تمرین‌ها با توجه به اهداف آموزشی انتخاب و بازبینی شدند و فایل‌های نهایی در قالب‌های مختلف تهیه و اصلاح شدند.
+
+در نسخه‌ی حاضر، محدودیتی برای تعداد جلسات در نظر گرفته نشده است تا مدرس بتواند با توجه به سطح کلاس، روند پیشرفت دانشجویان و زمان در دسترس، مباحث را تنظیم کند و میان مطالب اصلی و تکمیلی انتخاب مناسبی داشته باشد.
 
 ## شفافیت درباره‌ی استفاده از هوش مصنوعی
 
