@@ -2,6 +2,8 @@ version: 1
 project:
   title: "مبانی کامپیوتر و برنامه‌سازی"
   github: https://github.com/fum-cs/fundamentals-of-programming
+  plugins:
+    - ./render-c-magic.mjs
   affiliations:
     - id: fum
       institution: دانشگاه فردوسی مشهد

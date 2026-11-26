@@ -44,22 +44,24 @@ book/
     part-xxx.md           # the same part as Markdown
     src/                  # C example programs: pNN_cCC_SS_name.c
     images/               # images used by this part only
-.github/workflows/        # Pages deployment, build check, C examples check
+.github/workflows/        # GitHub Pages deployment
 docs/                     # style guide and part template
 ```
 
 ## Build locally
 
-Built with **Jupyter Book 2** (MyST). From the repository root:
+Built with **Jupyter Book 2** (MyST). Use Node.js 24 and npm as in CI,
+then run from the repository root:
 
 ```bash
-pip install jupyter-book                 # or: npm install -g jupyter-book
-env -u PORT jupyter book build --html    # output: _build/html/
+npm install -g jupyter-book@2
+env -u PORT -u BASE_URL jupyter-book build --html    # output: _build/html/
 ```
 
-Open the result through a web server (not by double-clicking `index.html`);
-see [production.md](production.md). Every push to `main` is deployed to GitHub
-Pages automatically.
+Open the result through a web server (not by double-clicking `index.html`).
+See [production.md](production.md) for local preview and Python virtual
+environment installation. Every push to `main` is deployed to GitHub Pages
+automatically.
 
 ## Run the C examples
 
