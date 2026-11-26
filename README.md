@@ -43,23 +43,24 @@ book/
     part-xxx.md           # همان بخش به‌صورت متن Markdown
     src/                  # برنامه‌های نمونه‌ی C: pNN_cCC_SS_name.c
     images/               # تصاویر مخصوص همان بخش
-.github/workflows/        # انتشار روی GitHub Pages (+ بررسی بیلد در Pull Request)
+.github/workflows/        # انتشار روی GitHub Pages
 CONTRIBUTING.md           # راهنمای افزودن و ویرایش محتوا
 production.md             # جزئیات بیلد، اجرای محلی و انتشار
 ```
 
 ## ساخت کتاب روی سیستم خودتان
 
-کتاب با **Jupyter Book 2** (موتور MyST) ساخته می‌شود. از ریشه‌ی مخزن:
+کتاب با **Jupyter Book 2** (موتور MyST) ساخته می‌شود. مانند CI، با Node.js
+۲۴ و npm، فرمان‌های زیر را از ریشه‌ی مخزن اجرا کنید:
 
 ```bash
-pip install jupyter-book                 # یا: npm install -g jupyter-book
-env -u PORT jupyter book build --html    # خروجی در: _build/html/
+npm install -g jupyter-book@2
+env -u PORT -u BASE_URL jupyter-book build --html    # خروجی در: _build/html/
 ```
 
-خروجی را از طریق یک وب‌سرور باز کنید، نه با دوبار کلیک روی `index.html`
-(جزئیات در [production.md](production.md)). هر push به شاخه‌ی `main` به‌طور
-خودکار بیلد و روی GitHub Pages منتشر می‌شود.
+روش نصب در محیط مجازی Python و اجرای محلی در [production.md](production.md)
+آمده‌اند. خروجی را از طریق یک وب‌سرور باز کنید، نه با دوبار کلیک روی `index.html`.
+هر push به شاخه‌ی `main` به‌طور خودکار بیلد و روی GitHub Pages منتشر می‌شود.
 
 ## اجرای مثال‌های C
 

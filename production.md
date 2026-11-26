@@ -10,29 +10,34 @@
 (لوگو، استایل) و فهرست مطالب صریح. صفحه‌ی آغازین `book/index.md` است و بخش‌ها
 در `book/parts/` قرار دارند.
 
-نصب:
+روش نصب مانند CI (با Node.js ۲۴ و npm):
 
 ```bash
-pip install jupyter-book            # نسخه‌ی ۲ — پوششی روی موتور MyST
-# یا: npm install -g jupyter-book   (همان چیزی که CI استفاده می‌کند)
+npm install -g jupyter-book@2
 ```
 
-بیلد از ریشه‌ی مخزن:
+یا با Python در یک محیط مجازی:
 
 ```bash
-jupyter book build --html           # خروجی: _build/html/
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install 'jupyter-book>=2,<3'
 ```
 
-نکته: اگر شل شما متغیر `PORT` را export می‌کند (مثلاً `PORT=0`)، آن را برای بیلد
-حذف کنید؛ MyST این متغیر را می‌خواند و خروجی استاتیک سعی می‌کند صفحه‌ها را از
-`http://localhost:0` بگیرد و شکست می‌خورد:
+با هر دو روش، از ریشه‌ی مخزن اجرا کنید:
 
 ```bash
-env -u PORT jupyter book build --html
+env -u PORT -u BASE_URL jupyter-book build --html  # خروجی: _build/html/
 ```
 
-نوت‌بوک‌ها هنگام بیلد **اجرا نمی‌شوند** و از خروجی‌های ذخیره‌شده استفاده
-می‌شود. برای اجرای آن‌ها: `jupyter book build --html --execute`.
+فرمان مشترک هر دو روش `jupyter-book` است؛ نصب npm فرمان جداگانه‌ی `jupyter` را
+فراهم نمی‌کند. برای بیلد محلی، `PORT` و `BASE_URL` را حذف می‌کنیم تا تنظیمات
+شل روی نشانی سرور و مسیر فایل‌های سایت اثر نگذارند. در اولین بیلد، MyST قالب
+سایت را دانلود می‌کند و به اینترنت نیاز دارد.
+
+بیلد عادی نوت‌بوک‌ها را **اجرا نمی‌کند**؛ از خروجی‌های ذخیره‌شده استفاده می‌کند
+و به کرنل Jupyter یا کامپایلر C نیاز ندارد. برای اجرای نوت‌بوک‌ها، پس از آماده‌کردن
+کرنل‌ها و ابزارهای لازم، گزینهٔ `--execute` را به دستور بیلد اضافه کنید.
 
 ## انتشار خودکار روی GitHub Pages
 
@@ -42,26 +47,25 @@ env -u PORT jupyter book build --html
 زبانه‌ی **Actions** ببینید. در *Settings → Pages* گزینه‌ی **Source** باید
 همیشه **GitHub Actions** باشد.
 
-Pull Requestها با `.github/workflows/build-check.yml` بررسی می‌شوند؛ همان بیلد
-را بدون انتشار اجرا می‌کند.
+برای بررسی پیش از Pull Request، بیلد و آزمون محلی را طبق
+[راهنمای مشارکت](CONTRIBUTING.md#بیلد-و-بررسی-پیش-از-pull-request) اجرا کنید.
 
 ## اجرای محلی کتاب
 
 با بازسازی خودکار هنگام ویرایش:
 
 ```bash
-env -u PORT jupyter book start     # http://localhost:3000
+env -u PORT -u BASE_URL jupyter-book start   # http://localhost:3000
 ```
 
 یا سرو کردن سایت استاتیکِ ساخته‌شده:
 
 ```bash
-cd _build/html
-python3 -m http.server 8811 --bind 127.0.0.1
+python3 -m http.server 8811 --bind 127.0.0.1 --directory _build/html
 ```
 
-سایت مبتنی بر JavaScript است: همیشه آن را از طریق وب‌سرور باز کنید، نه با
-دوبار کلیک روی `index.html`.
+از ریشه‌ی مخزن این دستور را اجرا کنید و [صفحهٔ کتاب](http://127.0.0.1:8811/)
+را باز کنید. باز کردن مستقیم `index.html` از روی دیسک جای وب‌سرور را نمی‌گیرد.
 
 ## متوقف کردن سرورهای محلی
 
@@ -71,13 +75,13 @@ python3 -m http.server 8811 --bind 127.0.0.1
 ss -tlnp | grep -E ':(3000|3001|8811)'   # پیدا کردن پورت‌ها و PIDها
 kill <PID>                               # توقف نرم؛ اگر نشد: kill -9
 fuser -k 3000/tcp                        # یا آزاد کردن مستقیم یک پورت
-pkill -f "book-theme/server.js"          # سرور باقی‌مانده‌ی `jupyter book start`
+pkill -f "book-theme/server.js"          # سرور باقی‌مانده‌ی `jupyter-book start`
 ```
 
 ## روش دستی انتشار روی GitHub Pages
 
 ```bash
-BASE_URL=/fundamentals-of-programming/ env -u PORT jupyter book build --html
+BASE_URL=/fundamentals-of-programming/ env -u PORT jupyter-book build --html
 pip install ghp-import
 ghp-import -n -p -f ./_build/html
 ```
@@ -85,7 +89,7 @@ ghp-import -n -p -f ./_build/html
 ## خروجی PDF (اختیاری)
 
 یک export با `format: pdf` به `myst.yml` اضافه کنید و
-`env -u PORT jupyter book build --pdf` را اجرا کنید (خروجی PDF در نسخه‌ی ۲ از
+`env -u PORT jupyter-book build --pdf` را اجرا کنید (خروجی PDF در نسخه‌ی ۲ از
 طریق Typst انجام می‌شود).
 
 ## مثال‌های C و فایل‌های تولیدشده

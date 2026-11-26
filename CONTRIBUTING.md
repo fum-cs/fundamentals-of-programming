@@ -21,7 +21,7 @@ book/
     src/pNN_cCC_SS_name.c      # مثال‌های C (pNN = بخش، cCC = فصل، SS = ترتیب)
     images/                    # تصاویر مخصوص همین بخش
   images/                      # تصاویر عمومی کتاب
-.github/workflows/             # deploy.yml (انتشار) و build-check.yml (بررسی PR)
+.github/workflows/             # deploy.yml (انتشار)
 ```
 
 ## ویرایش یک بخش موجود
@@ -71,14 +71,16 @@ book/
 
 ## بیلد و بررسی پیش از Pull Request
 
+پس از نصب Jupyter Book 2 طبق [راهنمای بیلد](production.md)، از ریشه‌ی مخزن:
+
 ```bash
-env -u PORT jupyter book build --html
+env -u PORT -u BASE_URL jupyter-book build --html
+node tests/check-part-two-render.mjs
 ```
 
-workflow با نام *Build check* همین دستور را روی هر Pull Request اجرا می‌کند.
-workflow دیگری به نام *Check C examples* هم همه‌ی فایل‌های `src/*.c` را کامپایل
-می‌کند (مثال‌هایی که عمداً خطای نحوی دارند، مثل `*_error_syntax.c`، کنار گذاشته
-می‌شوند). PR فقط وقتی ادغام شود که هر دو بررسی سبز باشند.
+بیلد و آزمون بالا را قبل از باز کردن Pull Request محلی اجرا کنید. اگر مثال C
+تغییر کرده است، آن را هم جداگانه کامپایل کنید (به‌جز مثال‌هایی که عمداً خطای
+نحوی دارند، مثل `*_error_syntax.c`).
 
 ## Commit و Pull Request
 
